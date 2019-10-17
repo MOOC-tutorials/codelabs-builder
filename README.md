@@ -19,6 +19,7 @@ On the front-end,
 
 ## Based on:
 
-* [Google Oauth Passport example](https://glitch.com/~google-passport-oauth) - Made by Fog Creek
-* [Claat tool](https://github.com/googlecodelabs/tools/blob/master/site/tasks/helpers/claat.js) - Google
+* [Google Oauth Passport example](https://glitch.com/~google-passport-oauth) - Made by Glitch (Gareth)
+* [Claat tool](https://github.com/googlecodelabs/tools/blob/master/site/tasks/helpers/claat.js) - Google (Marc Cohen)
 * [Basic usage of Google API](https://medium.com/@jackrobertscott/how-to-use-google-auth-api-with-node-js-888304f7e3a0) - Jack R. Scott
+* [SpreedSheet to JSON](https://glitch.com/edit/#!/spreadsheet) - Made by Glitch (Jessica Lord & Jenn Schiffer)
