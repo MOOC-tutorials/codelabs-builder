@@ -1,0 +1,27 @@
+{
+  "name": "google-passport-example",
+  "version": "0.0.1",
+  "description": "an example app implementing google oauth with passport",
+  "main": "server.js",
+  "scripts": {
+    "start": "bash claat_install.sh"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "googleapis": "^43.0.0",
+    "serve-index": "^1.9.1"
+  },
+  "engines": {
+    "node": "^8.0"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "google",
+    "oauth",
+    "passport"
+  ]
+}
