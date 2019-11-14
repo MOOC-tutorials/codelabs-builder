@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-10-24T16:35:34Z",
+  "id": "ambiente-front",
+  "duration": 12,
+  "title": "Ambiente de desarrollo para el front",
+  "authors": "dseuniandes",
+  "summary": "En este tutorial, usted probará el ambiente de desarrollo para el proyecto front.",
+  "source": "15uBAKtLNj7KYYcuaOU5R5lxxTEXTjDfyl6fLfb4k3dI",
+  "theme": "mv",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "mv"
+  ],
+  "tags": [
+    "ambienteisis2603"
+  ],
+  "feedback": "ambienteisis2603",
+  "url": "ambiente-front"
+}

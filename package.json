@@ -12,7 +12,9 @@
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "googleapis": "^43.0.0",
-    "serve-index": "^1.9.1"
+    "serve-index": "^1.9.1",
+    "@octokit/app": "^4.1.0",
+    "@octokit/rest": "^16.28.7"
   },
   "engines": {
     "node": "^8.0"

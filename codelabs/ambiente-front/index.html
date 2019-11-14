@@ -1,0 +1,124 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Ambiente de desarrollo para el front</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="ambiente-front"
+                  title="Ambiente de desarrollo para el front"
+                  environment="web"
+                  feedback-link="ambienteisis2603">
+    
+      <google-codelab-step label="Introducción" duration="2">
+        <p>Para poder realizar este taller ud debe:</p>
+<ol type="1" start="1">
+<li>Tener aprovisionada su máquina virtual para el curso ISIS2603. Si aún no lo ha hecho, por favor, vaya al curso en sicua y siga las instrucciones para obtener su máquina virtual y para acceder a ella.</li>
+<li>Tener su cuenta github asociada con su correo uniandes</li>
+<li>Haber aceptado la invitación a la organización github Uniandes-isis2603. Revise su correo con la invitación y no olvide revisar la bandeja de spam.</li>
+</ol>
+<h2 is-upgraded>Temas a tratar</h2>
+<ul>
+<li>Verificar que puede acceder a la organización </li>
+<li>Clonar el repositorio </li>
+<li>Abrir los proyectos</li>
+<li>Compilar la aplicación</li>
+<li>Visualizar la aplicación</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Verificar que puede acceder a Github" duration="5">
+        <h2 is-upgraded>Organización github del curso</h2>
+<p>En github existe la organización <a href="https://github.com/Uniandes-isis2603" target="_blank">https://github.com/Uniandes-isis2603</a> donde se encuentran creados los grupos (teams) y los repositorios de los proyectos de cada equipo. </p>
+<p>El repositorio de su grupo para el proyecto front es s<em>X_nombreProyecto_front_201920, </em>donde X es el número de su sección y nombreProyecto es el nombre de su proyecto<em>.</em></p>
+<aside class="special"><p>El repositorio para el proyecto de su equipo es privado y solo puede ser visto por los integrantes del equipo que hayan aceptado la invitación. </p>
+<p>Si no puede ver su repositorio, por la razón que sea, y mientras resuelve el problema,  puede realizar este tutorial con el repositorio <em>front-pregrado201910</em>, que está en la misma organización y es público; de este modo podrá probar el ambiente de su máquina. </p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Instalar Angular en la máquina virtual" duration="0">
+        <p>Abra una nueva terminal, vaya a la ruta C:\Users\Estudiante (cd C:\Users\Estudiante) e ingrese el comando npm install -g @angular/cli </p>
+<p>Esto instalará Angular y solo será necesario hacerlo una vez.</p>
+<p>Para garantizar que pueda tener acceso a los comandos de Angular, debe incluir la ruta de instalación en las variables de entorno del sistema. Para esto, vaya a Panel de control &gt; Sistema y seguridad &gt; Sistema &gt; Configuración avanzada del sistema. Luego seleccione Variables de entorno. En el panel Variables de usuario para estudiante seleccione la variable Path y haga clic en editar. Sin borrar los datos que están allí, vaya al final de la línea, coloque punto y coma y agregue la ruta &#34;C:\Users\Estudiante\AppData\Roaming\npm&#34;.          </p>
+<p class="image-container"><img style="width: 851.13px" src="img/c1707c8144a63d79.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Clonar el repositorio" duration="5">
+        <h2 is-upgraded><strong>Instrucciones básicas</strong></h2>
+<p>Para clonar un repositorio de github, es decir crear una copia en su máquina del repositorio en github y guardar información para su posterior sincronización, ud debe:</p>
+<ol type="1" start="1">
+<li>Estar logueado en la máquina virtual con el usuario estudiante</li>
+<li>Estar ubicado en una carpeta donde va a crear la copia del repositorio. </li>
+<li>La carpeta debe estar ubicada en el directorio raíz en una ruta que no contenga espacios</li>
+<li>Tener la url del repositorio front que va a clonar</li>
+<li>Tener instalado en la máquina donde va a clonar un cliente de git. </li>
+</ol>
+<p>Para el caso del proyecto del curso, en su máquina virtual ya está instalado un cliente de git (en la línea de comandos).</p>
+<h2 is-upgraded>U<strong>RL del repo que se va a clonar</strong></h2>
+<p>En github.com localice el repositorio que va a clonar, seleccione &#34;Clone or download&#34; y copie la url.</p>
+<h2 is-upgraded><strong>Clonar desde línea de comandos</strong></h2>
+<p>Desde una línea de comandos vaya a la carpeta de su preferencia e ingrese el comando </p>
+<p><strong>git clone url</strong></p>
+<p>donde <em>url </em>corresponde a la dirección del repositorio (por ejemplo, https://github.com/Uniandes-isis2603/s4_Servicios_front_201920.git<strong>)</strong></p>
+<p>Luego aparecerá una ventana emergente en la que se le pedirán las credenciales de github.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Abrir el proyecto" duration="0">
+        <p>Para abrir el proyecto se sugiere tener instalado Visual Studio Code, el cual lo puede descargar desde esta dirección: <a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a></p>
+<p>Una vez haya instalado Visual Studio Code, abra la carpeta en donde clonó el proyecto.</p>
+<p class="image-container"><img style="width: 602.00px" src="img/a3a6425a2d51fd1f.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Instalar dependencias y compilar la aplicación" duration="0">
+        <p>En Visual Studio Code, abra una nueva terminal y asegúrese de que está en la raíz de su proyecto. Luego, ingrese el comando npm install. Esto instalará las dependencias necesarias.</p>
+<p class="image-container"><img style="width: 602.00px" src="img/ece593a98cd32d4c.png"></p>
+<p>Para ejecutar la aplicación, desde la misma terminal e ingrese el comando ng serve</p>
+<p class="image-container"><img style="width: 594.00px" src="img/cdd089fb1be96a4a.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Visualizar la aplicación" duration="0">
+        <p>Vaya a un navegador e ingrese la dirección <a href="http://localhost:4200" target="_blank">http://localhost:4200</a></p>
+<p class="image-container"><img style="width: 602.00px" src="img/e259d316bfa9e8ea.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

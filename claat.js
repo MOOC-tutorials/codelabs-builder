@@ -18,12 +18,24 @@ const fs = require('fs');
 // Based on: https://github.com/googlecodelabs/tools/blob/master/site/tasks/helpers/claat.js
 exports.run = (cwd, cmd, auth, fmt, args, callback) => {
   args.unshift(cmd, '-auth', auth, '-f', fmt);
-  const proc = spawn('./claat', args, { stdio: 'inherit', cwd: cwd, env: process.env });
+  const proc = spawn('./claat', args, {cwd: cwd, env: process.env });
   
-  proc.on('close', (e) => {
+  // Get process stdout
+  let output = '';
+
+  proc.stderr.on('data', (data) => {
+    //Here is where the output goes
+    console.log('stderr: ' + data);
+    data = data.toString();
+    output += data;
+  });
+  
+  // Handle error
+  proc.on('close', async (e) => {
     if (e) {
       throw new Error(e);
     }
-    callback();
+    await callback(output);
     });
+  
 };

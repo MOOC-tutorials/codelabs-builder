@@ -1,0 +1,22 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-10-28T20:12:21Z",
+  "id": "angular-in-memory",
+  "duration": 12,
+  "title": "Tutorial Librerías API básico en memoria y Toastr",
+  "authors": "dseuniandes",
+  "summary": "En este tutorial, usted podrá utilizar una librería angular para simular un API básico y utilizar http sin necesidad de conectarse a un back porque los datos serán mantenidos en memoria.",
+  "source": "1f7bigEL7iihYZBWuvhEelpG0Kn5sc0VNDgZBR00mSrg",
+  "theme": "mv",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "mv"
+  ],
+  "tags": [],
+  "url": "angular-in-memory"
+}

@@ -1,15 +1,12 @@
 const url = require('url');
 const {urlGoogle, getGoogleDriveDocFromCode} = require('./google-utils');
+const {commitBuild} = require('./github-utils.js');
+
 
 module.exports = (app) => {
   // index route
   app.get('/', (req, res) => {
-    if(req.session.code){
-      const {code} = req.session;
-      res.redirect('/success?code=' + code);
-    } else{
-      res.redirect(urlGoogle());  
-    }
+    res.redirect(urlGoogle());
   });
 
   // Auth code return
@@ -29,8 +26,10 @@ module.exports = (app) => {
           // If they submit a key, get the data
           if(key.code && key.key){
             req.session.code = key.code
-            getGoogleDriveDocFromCode(key.code, key.key, () => {
-            res.redirect('codelabs');
+            getGoogleDriveDocFromCode(key.code, key.key, async (output) => {
+              const baseDir = output.split('\t').pop();
+              commitBuild(baseDir);
+              res.redirect('codelabs');
             });
           } else if (key.code) {
             req.session.code = key.code;
@@ -39,8 +38,10 @@ module.exports = (app) => {
           } else if (key.key){
             if(req.session.code){
               const code = req.session.code;
-              getGoogleDriveDocFromCode(code, key.key, () => {
-              res.redirect('codelabs');
+              getGoogleDriveDocFromCode(code, key.key, async (output) => {
+                const baseDir = output.split('\t').pop();
+                commitBuild(baseDir);
+                res.redirect('codelabs');
             });            
             } else {
               //No code exists

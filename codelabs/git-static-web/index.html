@@ -1,0 +1,96 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Proyecto git: Corrigiendo un sitio web estático</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="git-static-web"
+                  title="Proyecto git: Corrigiendo un sitio web estático"
+                  environment="web"
+                  feedback-link="https://github.com/dalthviz/git_web_practice">
+    
+      <google-codelab-step label="Introducción al proyecto y pasos previos" duration="5">
+        <p>En este proyecto vamos a poner en práctica el conjunto de comandos básicos de git que se han aprendido hasta el momento. En esta oportunidad se le asignó realizar, junto con un equipo de trabajo automatizado, la corrección de una página web estática. La misma presenta múltiples errores y es prioridad de su equipo lograr corregirlos.</p>
+<p>Por otro lado, el código se encuentra disponible en Github y a continuación se explica brevemente la configuración del ambiente de desarrollo necesaria para poder comenzar a trabajar. Posteriormente se explica la manera en que se le informará de los errores a corregir y las soluciones a implementar.</p>
+<h2 is-upgraded><strong>Antes de comenzar</strong></h2>
+<ul>
+<li>Asegúrese de tener una <a href="https://github.com/" target="_blank">cuenta en Github</a> y tener la sesión iniciada.</li>
+<li>Asegurese de tener <a href="https://git-scm.com/download" target="_blank">Git </a>instalado.</li>
+<li>Se recomienda usar algún editor de archivos con manejo de sintaxis. Una opción recomendada es usar <a href="https://code.visualstudio.com/Download" target="_blank">Visual Studio Code</a>.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configuración del ambiente de desarrollo y equipo automatizado" duration="0">
+        <h2 is-upgraded><strong>Primeros pasos</strong></h2>
+<ul>
+<li>Ir a <a href="https://github.com/MOOC-tutorials/git_web_practice" target="_blank">https://github.com/MOOC-tutorials/git_web_practice</a> </li>
+<li>Dar clic sobre el botón de <img style="width: 58.00px" src="img/104a150295caf485.png"></li>
+<li>Ahora debería tener dentro de su cuenta un nuevo repositorio con el sitio web estático base con el nombre <strong><em>git_web_practice</em></strong></li>
+</ul>
+<h2 is-upgraded><strong>Dando permisos al equipo de trabajo automático</strong></h2>
+<ul>
+<li>Instalar la Github App disponible en <a href="https://github.com/apps/static-web-project" target="_blank">https://github.com/apps/static-web-project</a> </li>
+<li>Clic en <img style="width: 305.00px" src="img/9761d9a553f6b29b.png"></li>
+<li>Seleccione su cuenta (donde quedó creado el repositorio <strong><em>git_web_practice</em></strong>)</li>
+<li>Seleccione y haga clic sobre<img style="width: 205.00px" src="img/ad0129173eb76548.png">y seleccione el repositorio <strong><em>git_web_practice</em></strong>. Clic en <img style="width: 88.00px" src="img/34cdfb8e6a451511.png"></li>
+</ul>
+<p>Debería observar una pantalla como la siguiente:</p>
+<p class="image-container"><img style="width: 586.50px" src="img/c749e5446ca5e2f3.png"></p>
+<h2 is-upgraded><strong>Clonando el repositorio</strong></h2>
+<ul>
+<li>En su repositorio <strong><em>git_web_practice </em></strong>en Github, haga clic en <img style="width: 133.00px" src="img/941506e4c60606f9.png"></li>
+<li>Copie la URL dada. Puede usar el botón<img style="width: 36.00px" src="img/394679e04c1d36b6.png"> (este botón copiara en su portapapeles la URL que se necesita).</li>
+<li>En su terminal/consola ubíquese en el directorio en que desea que se clone el repositorio usando el comando <code>cd</code>.</li>
+<li>En su terminal/consola escriba <code>git clone &lt;URL del repositorio&gt;</code>.</li>
+<li>Cambie el directorio activo (<code>cd</code>) a la carpeta raíz del repositorio. Ejecutando <code>cd git_web_practice</code> debería bastar.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Proyecto: Errores a solucionar" duration="30">
+        <p>En este momento debería de contar con una copia local del repositorio con el código de la página web estática. Partiendo de esto ahora podemos hacer los cambios necesarios para corregir los errores. La idea general es arreglar este sitio teniendo en cuenta las instrucciones que irán apareciendo en la sección de <strong><em>issues </em></strong>en el repositorio en Github. Por cada arreglo especificado es necesario hacer un <strong><em>commit</em></strong>. Además, luego de cada <strong><em>commit, </em></strong>debe subir sus cambios locales mediante un <strong><em>push</em></strong> al repositorio remoto.</p>
+<h2 is-upgraded><strong>Instrucciones sobre los errores a corregir...</strong></h2>
+<p>Los elementos a corregir podrá ir observandolos en su repositorio en Github (aparecerán dentro de sus issues asignados con el tag <strong><em>bug</em></strong>). Para empezar a trabajar, diríjase a la sección de issues de su repositorio. Allí encontrará el primer error a corregir.</p>
+<p>En general, a partir de este momento cualquier información o acción a realizar sobre el repositorio o su trabajo le será reportada mediante un issue en la sección correspondiente en Github del repositorio.</p>
+<aside class="special"><p><strong>NOTAS:</strong></p>
+<ul>
+<li><em>Por cada error debe realizar un commit cuyo comentario siga la convención: </em><strong><em>&lt;FIX ID&gt;: &lt;Comentario&gt;</em></strong></li>
+<li><em>Le serán asignados 3 issues mientras va trabajando. Al finalizar un issue, se le asignará el siguiente y podrá encontrarlo en el repositorio en Github (puede que sea necesario refrescar la página luego de finalizada una tarea previa). Si la corrección no es la esperada, se le informará y deberá realizar la revisión y cambios que correspondan y volver a realizar el commit de los cambios.</em></li>
+<li><em>Puede que durante la corrección surjan conflictos. En dicho caso, debe de corregirlos y realizar el commit con el comentario correspondiente al fix que estaba implementando en el momento que el conflicto surgió con la siguiente convención: </em><strong><em>&lt;FIX ID&gt;: &lt;Comentario por defecto del merge&gt;</em></strong></li>
+</ul>
+</aside>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

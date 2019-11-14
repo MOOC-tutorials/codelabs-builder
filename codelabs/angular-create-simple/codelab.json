@@ -1,0 +1,22 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-10-28T15:06:31Z",
+  "id": "angular-create-simple",
+  "duration": 18,
+  "title": "Tutorial Formularios básicos",
+  "authors": "dseuniandes",
+  "summary": "En este tutorial, usted podrá seguir los pasos para desarrollar un componente que el permite construir un formulario para crear un elemento de un recurso.",
+  "source": "1_KVWvrlwXMDewPsAQS9qLEdzHCI1gMPusEMhGlXgEzE",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "web"
+  ],
+  "tags": [],
+  "url": "angular-create-simple"
+}
