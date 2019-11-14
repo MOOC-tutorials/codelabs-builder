@@ -1,0 +1,297 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Tutorial Librerías API básico en memoria y Toastr</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="angular-in-memory"
+                  title="Tutorial Librerías API básico en memoria y Toastr"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introducción" duration="2">
+        <p>Este tutorial es una extensión del tutorial <a href="https://codelabs-builder.glitch.me/codelabs/angular-create-simple/index.html#0" target="_blank">Crear un Formulario en Angular</a> y le agrega al ejercicio del formulario dos elementos:</p>
+<ol type="1" start="1">
+<li>Una librería de angular llamada <code>api-in-memory</code> que permite utilizar todos los métodos http (get, post,  put, delete)  sin necesidad de conectarse a una aplicación back.</li>
+<li>Una librería de angular llamada <code>ngx-toastr</code> que permite crear mensajes de retroalimentación al usuario. </li>
+</ol>
+<p>El código del ejemplo <a href="https://stackblitz.com/edit/angular-form-simple-api-toastr" target="_blank">aquí</a></p>
+<p>El resultado del tutorial es una aplicación que tiene el formulario básico del tutorial anterior, la implementación de los servicios usando http y el uso de la librería <code>ngx-toastr</code> para los mensajes. </p>
+<p class="image-container"><img style="width: 571.00px" src="img/262837e12af944b6.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Crear la información en memoria" duration="5">
+        <h2 is-upgraded>Paso 1a: Instalar en el proyecto de stackblitz la dependencia <code>angular-in-memory-web-ap</code><strong><code>i</code></strong></h2>
+<p class="image-container"><img style="width: 424.00px" src="img/2c48524a7601f1a.png"></p>
+<h2 is-upgraded>Paso 1b: Instalar en el proyecto angular-in-memory-web-ap<strong><code>i</code></strong></h2>
+<p>Si está por fuera de stackblitz, debe ejecutar el comando:</p>
+<pre>npm i angular-in-memory-web-api</pre>
+<h2 is-upgraded><strong>Paso 2: Crear un servicio con los datos en memoria</strong></h2>
+<p>Cree  un servicio, a nivel de <code>app</code>, que se llame (xyz es el nombre de su aplicación): in-memory-xyz</p>
+<p>En nuestro ejemplo <code>xyz</code> es <code>client</code></p>
+<p class="image-container"><img style="width: 395.00px" src="img/979a71b268b1b395.png"></p>
+<p>El servicio debe implementar <code>InMemoryDbService</code> que declara el método <code>createDB</code>. este método define los datos que no es otra cosa que un arreglo de objetos, así:</p>
+<pre><code>import { InMemoryDbService } from &#34;angular-in-memory-web-api&#34;;
+
+export class InMemoryClientService implements InMemoryDbService {
+  createDb() {
+    let clientes = [
+      {
+        id: 1,
+        name: &#34;Husain Sommerfeld&#34;,
+        address: &#34;2 Darwin Way&#34;
+      },
+      {
+        id: 2,
+        name: &#34;Zia Sheahan&#34;,
+        address: &#34;6 Ramsey Parkway&#34;
+      },
+      {
+        id: 3,
+        name: &#34;Vanda Blackborow&#34;,
+        address: &#34;22346 Eagle Crest Junction&#34;
+      },
+      {
+        id: 4,
+        name: &#34;Bonnibelle Howells&#34;,
+        address: &#34;7 Atwood Way&#34;
+      }
+    ];
+    return { clientes };
+  }
+}</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Crear el servicio" duration="5">
+        <aside class="special"><p>No necesita hacer este paso si está trabajando sobre su ejemplo anterior y ya tiene definido el servicio. Recuerde que lo usual es que haya un servicio por módulo. Este servicio contiene todos los métodos que serán llamados desde los componentes del módulo. En particular, los métodos createXYZ, getXYZ, updateXYZ,... cada uno de estos métodos invoca respectivamente, http.post(), http.get(), http.put(), etc. </p>
+</aside>
+<p>Utilizando el Angular Generator cree, en el módulo <code>client</code> un servicio y llámelo <code>xyz</code> (en nuestro ejemplo <code>client</code>). El generador completa el nombre y el archivo queda: <code>client.service.ts</code></p>
+<p>Abra el archivo que creó y note que el servicio es una clase typescript.  Esta clase contendrá la lógica del componente, es decir, los métodos para traer los valores (GET), crear valores (POST), etc.  Estos métodos los vamos a implementar utilizando una librería de angular llamada  <code>HttpClient:</code></p>
+<p>En la clase del servicio definimos:</p>
+<pre><code>import { Injectable } from &#34;@angular/core&#34;;
+import { HttpClient, HttpHeaders } from &#34;@angular/common/http&#34;;
+
+import { Observable, of } from &#34;rxjs&#34;;
+import { catchError, map, tap } from &#34;rxjs/operators&#34;;
+
+import { Client } from &#34;./client&#34;;
+
+@Injectable({ providedIn: &#34;root&#34; })
+export class ClientService {
+  private clientesUrl = &#34;api/clientes&#34;; // URL to web api
+
+  httpOptions = {
+    headers: new HttpHeaders({ &#34;Content-Type&#34;: &#34;application/json&#34; })
+  };
+
+  constructor(private http: HttpClient) {}
+
+  /** GET clientes from the server */
+  getClientes(): Observable&lt;Client[]&gt; {
+    return this.http.get&lt;Client[]&gt;(this.clientesUrl);
+  }
+
+  /** GET client by id. Will 404 if id not found */
+  getClient(id: number): Observable&lt;Client&gt; {
+    const url = `${this.clientesUrl}/${id}`;
+    return this.http.get&lt;Client&gt;(url);
+  }
+  /** POST: add a new client to the server */
+  createClient(client: Client): Observable&lt;Client&gt; {
+    return this.http.post&lt;Client&gt;(this.clientesUrl, client, this.httpOptions).pipe(tap((client: Client) =&gt; console.log(`added editorial w/ ${client.name} id=${client.id}`)));
+  }
+
+  /** DELETE: delete the client from the server */
+  deleteClient(client: Client | number): Observable&lt;Client&gt; {
+    const id = typeof client === &#34;number&#34; ? client : client.id;
+    const url = `${this.clientesUrl}/${id}`;
+
+    return this.http.delete&lt;Client&gt;(url, this.httpOptions);
+  }
+
+  /** PUT: update the client on the server */
+  updateClient(client: Client): Observable&lt;any&gt; {
+    return this.http.put(this.clientesUrl, client, this.httpOptions);
+  }
+}</code></pre>
+<pre></pre>
+<p><strong>Paso 3: Invocar los métodos del servicio desde el componente</strong></p>
+<p>En el componente se definen los métodos que serán llamadas desde la vista (el html) y a la creación del componente para inicializar datos. Estos métodos, generalmente lo que hacen es invocar los métodos definidos en la clase servicio del componente.</p>
+<h3 is-upgraded>Método <code>getClients()</code></h3>
+<p>El componente debe definir un método <code>getClients()</code>para traer la lista de todos los clientes. Este método se implementa de la siguiente forma:</p>
+<pre><code>getClients(): void {
+  this.clientService.getClients().subscribe(clients =&gt; this.clients = clients);
+ }</code></pre>
+<pre></pre>
+<p>El método se debe  llamar a la creación del componente. Para esto, la clase del componente debe implementar una interface <code>OnInit</code> que  define un método de inicialización <code>ngInit</code>. </p>
+<h3 is-upgraded><strong>Método</strong><strong><code> createClient(newClient: Client)</code></strong></h3>
+<p>El componente debe definir el método que va a crear un nuevo cliente y que será invocado desde el formulario cuando el usuario haga submit. </p>
+<p>El método recibe el objeto del nuevo cliente e invoca el servicio: </p>
+<pre><code>createClient(newClient: Client) {
+    // Process checkout data here
+    console.warn(&#34;el cliente fue creado&#34;, newClient);
+
+    this.clientService.createClient(newClient).subscribe(client =&gt; {
+      this.clientes.push(client);
+    });
+    this.clientForm.reset();
+  }
+</code></pre>
+<pre></pre>
+<p>El código completo es:</p>
+<pre><code>import { Component, OnInit } from &#34;@angular/core&#34;;
+import { FormBuilder, FormGroup, Validators } from &#34;@angular/forms&#34;;
+
+
+
+import { Client } from &#34;../client&#34;;
+import { ClientService } from &#34;../client.service&#34;;
+
+@Component({
+  selector: &#34;app-client-create&#34;,
+  templateUrl: &#34;./client-create.component.html&#34;,
+  styleUrls: [&#34;./client-create.component.css&#34;]
+})
+export class ClientCreateComponent implements OnInit {
+  clientForm: FormGroup;
+
+  clientes: Client[];
+
+  constructor(
+    private clientService: ClientService,
+    private formBuilder: FormBuilder
+     ) {
+    this.clientForm = this.formBuilder.group({
+      name: [&#34;&#34;, [Validators.required, Validators.minLength(2)]],
+      address: [&#34;&#34;, Validators.required]
+    });
+  }
+
+  createClient(newClient: Client) {
+    // Process checkout data here
+    console.warn(&#34;el cliente fue creado&#34;, newClient);
+
+    this.clientService.createClient(newClient).subscribe(client =&gt; {
+      this.clientes.push(client);
+    });
+    this.clientForm.reset();
+  }
+
+  ngOnInit() {
+    this.clientService
+      .getClientes()
+      .subscribe(clientes =&gt; (this.clientes = clientes));
+  }
+}
+</code></pre>
+<pre></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Utilizar ngx-toastr para crear notificaciones y alertas al usuario" duration="0">
+        <p>Toastr es una librería  para crear mensajes de notificación o alerta al usuario final. Un demo de las cosas que se pueden hacer con esto puede ser vista <a href="https://codeseven.github.io/toastr/demo.html" target="_blank">aquí</a>.</p>
+<p><code>ngx-toastr</code> es la implementación para ser utilizada desde aplicaciones angular. La documentación completa de la librería la puede encontrar <a href="https://www.npmjs.com/package/ngx-toastr" target="_blank">aquí</a>.</p>
+<p>Los pasos generales son:</p>
+<ol type="1" start="1">
+<li>Instalar la librería <code>ngx-toastr</code> y la librería <code>@angular/animations</code></li>
+<li>Agregar en <code>angular.json</code> los estilos del toastr</li>
+<li>Importar en el módulo principal de su aplicación el módulo del toastr y el de las animaciones. En este paso se hace la configuración general de dónde y cómo se van a ver los mensajes.</li>
+<li>Incluir en cada componente donde se va a utilizar,  el servicio del toastr</li>
+<li>Llamar al toastr</li>
+</ol>
+<h2 is-upgraded><strong>Paso 1: Instalar las librerías</strong></h2>
+<p>Librería del ngx-toastr:</p>
+<h3 is-upgraded>Librería de animaciones de angular:</h3>
+<p class="image-container"><img style="width: 317.81px" src="img/cf8d0018b03858c4.png"></p>
+<h2 is-upgraded>Paso 2: Agregar en <code>angular.json</code><strong> los estilos del toastr</strong></h2>
+<p>En el archivo <code>angular.json</code> vaya a &#34;styles&#34; y agregue:</p>
+<pre><code>&#34;styles&#34;: [
+  &#34;styles.scss&#34;,
+  &#34;node_modules/ngx-toastr/toastr.css&#34;]
+</code></pre>
+<h2 is-upgraded><strong>Paso 3: Importar y Configurar el Toastr</strong></h2>
+<p>En el módulo principal de la aplicación se debe importar las dos librerías que se instalaron <code>BrowserAnimationsModule y ToastrModule</code>:</p>
+<pre><code>import { CommonModule } from &#39;@angular/common&#39;;
+import { BrowserAnimationsModule } from &#39;@angular/platform-browser/animations&#39;;
+ 
+import { ToastrModule } from &#39;ngx-toastr&#39;;
+ 
+@NgModule({
+  imports: [
+    CommonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added. Aquí se realiza la configuración
+  ],
+  bootstrap: [App],
+  declarations: [App]
+})
+class MainModule {}</code></pre>
+<pre></pre>
+<h2 is-upgraded><strong>Paso 4: Incluir en cada componente donde se va a utilizar,  el servicio del toastr</strong></h2>
+<p>En cada clase componente donde se va a utilizar el toastr, se debe incluir el servicio <code>ToastrService</code> y se debe inyectar en el constructor del componente para poder utilizarlo.</p>
+<pre><code>import { ToastrService } from &#39;ngx-toastr&#39;;
+@Component({...})
+export class YourComponent {
+  constructor(private toastr: ToastrService) {}
+...
+}</code></pre>
+<h2 is-upgraded><strong>Paso 5: Llamar al toastr</strong></h2>
+<p>Los métodos que se pueden llamar sobre el servicio <code>toastr</code> son:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Success</p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 286.00px" src="img/db4cd98645a5e17e.png"></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Info</p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 286.00px" src="img/33c97de70026045d.png"></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Warning</p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 328.00px" src="img/107f87406b0b557f.png"></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Error</p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 347.00px" src="img/21d4e0d25028498b.png"></p>
+</td></tr>
+</table>
+<p>Note que en cada caso, el ícono y el color del mensaje cambian. De forma general, los argumentos que reciben estos métodos son:</p>
+<pre><code>success, error, info, warning (message, title, ToastConfig)</code></pre>
+<p>Dónde <code>title</code> es la frase de arriba, <code>message</code> la segunda frase y <code>ToastConfig</code> es un objeto json donde se puede configurar, entre otras cosas: el tiempo durante el cual se va a mostrar el mensaje, la posición en la pantalla, etc. Por ejemplo:</p>
+<pre><code>showSuccess() {
+    this.toastr.success(&#34;Cliente&#34;, &#34;Creado exitosamente!&#34;, {&#34;progressBar&#34;: true,timeOut:3000});
+  }</code></pre>
+<p>La documentación completa de todas las opciones la encuentra <a href="https://www.npmjs.com/package/ngx-toastr" target="_blank">aquí</a>.</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-10-24T00:18:57Z",
+  "id": "tutor-fabricas",
+  "duration": 203,
+  "title": "Guía del tutor: Fábricas de Sw y Líneas de Producto",
+  "authors": "Daniel Althviz",
+  "summary": "Guía con información semana a semana de las actividades que realiza el tutor, y los objetivos que se busca alcanzar con los estudiantes",
+  "source": "1vTZhy8DRQQ7iPBePKZEsDDVH0VLdWZFmIZjZL2vME7c",
+  "theme": "factories",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "factories"
+  ],
+  "tags": [
+    "factories",
+    "tutor"
+  ],
+  "feedback": "https://github.com/dalthviz/codelabs",
+  "url": "tutor-fabricas"
+}

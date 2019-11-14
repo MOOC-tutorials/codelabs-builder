@@ -1,0 +1,22 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-10-23T21:27:16Z",
+  "id": "angular-basico",
+  "duration": 18,
+  "title": "Tutorial Angular Básico",
+  "authors": "dseuniandes",
+  "summary": "En este tutorial, usted probará el ambiente de desarrollo para el proyecto del curso en su máquina virtual.",
+  "source": "1nSb0bFb8sI6HUS89jFiCrsDkOb9q2rIsJ73ML6Bqlrc",
+  "theme": "mv",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "mv"
+  ],
+  "tags": [],
+  "url": "angular-basico"
+}

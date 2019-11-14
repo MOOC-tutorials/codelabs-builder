@@ -1,0 +1,309 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Tutorial Angular Básico</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="angular-basico"
+                  title="Tutorial Angular Básico"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introducción" duration="2">
+        <p>Para poder realizar este taller ud debe haber leído los conceptos básicos sobre angular en el libro del curso. Tener claro:</p>
+<ol type="1" start="1">
+<li>Cuál es la estructura de un proyecto de Angular: módulos, componentes, servicios</li>
+<li>Entender la funcionalidad del Angular-Cli</li>
+</ol>
+<p>En este ejemplo vamos a crear una aplicación Angular con un componente para mostrar una Lista de alguno de los recursos de su aplicación. Para esto vamos a definir, además del módulo principal, un módulo funcional llamado XYZModule, donde XYZ es el recurso que Ud. ha seleccionado para el taller. Este módulo tendrá un componente que se ocupa de listar los recursos xyz.</p>
+<aside class="special"><p>Nota: Las explicaciones con el ejemplo del recurso Editorial están en <a href="https://dseuniandes.gitlab.io/book/cap%C3%ADtulos/11-Angular.html#3ejemplolista" target="_blank">Capítulo 12: Ejemplo Lista</a></p>
+<p>Así como los videos con el paso a paso y las explicaciones. Este tutorial es un paso a paso pero no reemplaza las explicaciones del material de los  <a href="https://uniandes.padlet.org/dse/quv3n6y6scrv" target="_blank">videos</a></p>
+</aside>
+<h2 is-upgraded><strong>Contenido</strong></h2>
+<p>Introducción</p>
+<p>Contenido</p>
+<p>Crear el proyecto y el módulo de listar</p>
+<p>Paso 1: Crear el proyecto</p>
+<p>Paso 2: Crear el módulo</p>
+<p>Paso 3: Asociar el nuevo módulo en la aplicación principal.</p>
+<p>Crear el componente de listar</p>
+<p>Paso 1: Crear el componente dentro del módulo</p>
+<p>Paso 2: Asociar el componente con el módulo</p>
+<p>Llamar el componente de listar</p>
+<p>Paso 1: Desplegar &#34;editorial-list works&#34;</p>
+<p>Crear la vista del componente Listar</p>
+<p>Paso 1: Crear la tabla</p>
+<p>Paso 2:  Declarar el atributo que contiene los elementos</p>
+<p>Paso 2:  Declarar la interface del tipo de los elementos</p>
+<p>Paso 3:  Importar la interface del tipo de los elementos en el componente</p>
+<p>Paso 4:  Iterar sobre la lista en la vista del componente</p>
+<p>Crear un servicio para obtener los datos</p>
+<p>Paso 1: Crear el servicio</p>
+<p>Paso 2: Invocar el servicio</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Crear el proyecto y el módulo del recurso" duration="2">
+        <h2 is-upgraded><strong>Paso 1 versión 1: Crear el proyecto</strong></h2>
+<p>Ingrese, con su cuenta de github, a <a href="https://stackblitz.com/edit/angular-2bfbkh" target="_blank">https://stackblitz.com</a> y cree un nuevo proyecto Angular. </p>
+<p>Renombre el proyecto con el nombre listar-xyz, donde xyz es el nombre del recurso de su proyecto que Ud.  ha seleccionado para este taller.  En este ejemplo nuestro recurso Xyz es Editorial.</p>
+<h2 is-upgraded><strong>Paso 1 versión 2: Crear el proyecto</strong></h2>
+<p>Este ejercicio se va a realizar sobre su proyecto  front. Instrucciones <a href="https://codelabs-builder.glitch.me/codelabs/ambiente-mv/index.html#0" target="_blank">aquí</a></p>
+<p>Seleccione un recurso de su proyecto para este taller.  En este ejemplo nuestro recurso Xyz es Editorial.</p>
+<h2 is-upgraded><strong>Paso 2: Crear el módulo</strong></h2>
+<p>Sobre la carpeta app de su proyecto seleccione la opción de Angular Generator (angular-cli) y allí módulo:</p>
+<p class="image-container"><img style="width: 602.00px" src="img/915fd158e80672e6.png"></p>
+<p>Defina el nombre de su módulo. Por ejemplo xyz si su recurso es el recurso Xyz.</p>
+<h2 is-upgraded><strong>Paso 3: Asociar el nuevo módulo en la aplicación principal. </strong></h2>
+<p>Vaya al archivo app.module.ts y agregue el nuevo módulo. Debe hacer dos cosas: 1) Importar utilizando el nombre de la clase del nuevo módulo y asociarlo con el archivo físico. Asegúrese de escribir correctamente la ruta del archivo físico. 2) Incluir en el atributo imports del decorador del módulo, el nombre del módulo nuevo.</p>
+<p class="image-container"><img style="width: 569.00px" src="img/70ce07c9e914d02c.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Crear el componente de listar" duration="2">
+        <h2 is-upgraded><strong>Paso 1: Crear el componente dentro del módulo</strong></h2>
+<p>Vaya a la carpeta del módulo xyz (editorial), click derecho Angular Generator/Componente</p>
+<p class="image-container"><img style="width: 544.00px" src="img/cd6883369aa5f561.png"></p>
+<p>Dele el nombre xyz-list (editorial-list). Verifique que se crearon tres archivos dentro de una carpeta nueva xyz-list dentro de la carpeta del módulo xyz.</p>
+<p class="image-container"><img style="width: 287.00px" src="img/e42e11fef8decee9.png"></p>
+<h2 is-upgraded><strong>Paso 2: Asociar el componente con el módulo</strong></h2>
+<p>Angular-cli crea la declaración del componente en el módulo. Sin embargo, se debe agregar una línea con el atributo <strong>exports </strong>para que este componente se pueda ver desde la aplicación principal .</p>
+<p class="image-container"><img style="width: 602.00px" src="img/346810cd6f2d5f52.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Llamar el componente de listar" duration="2">
+        <h2 is-upgraded><strong>Paso 1: Desplegar &#34;editorial-list works&#34;</strong></h2>
+<p>Abra el archivo de la vista del componente de listar &#34;editorial-list.component.html.  Allí se encuentra lo que queremos que se despliegue en la página principal.</p>
+<p class="image-container"><img style="width: 602.00px" src="img/b821dc483348a248.png"></p>
+<p>Para lograrlo:</p>
+<ol type="1" start="1">
+<li>Vaya al archivo donde está definida la clase del componente &#34;editorial-list.component&#34; y copie la cadena que define el nombre del selector:</li>
+</ol>
+<p class="image-container"><img style="width: 378.00px" src="img/16bf8d98e15531.png"></p>
+<ol type="1" start="2">
+<li>En el archivo del componente principal &#34;app.component.html&#34; borre lo que hay y copie el selector entre tags.</li>
+</ol>
+<p class="image-container"><img style="width: 269.00px" src="img/309bbd5f69578dfe.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Crear la vista del componente Listar" duration="5">
+        <h2 is-upgraded><strong>Paso 1: Crear la tabla</strong></h2>
+<p>La vista del componente, es decir el código html, va en el archivo &#34;editorial-list.component.html&#34;.</p>
+<p>Defina una tabla básica en html como la que se presenta a continuación:</p>
+<pre>&lt;div class=&#34;container-fluid&#34;&gt;
+  &lt;div class=&#34;col-md-2&#34;&gt;
+    &lt;table class=&#34;table table-striped&#34;&gt;
+      &lt;thead class=&#34;thead-dark&#34;&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Editorial Name&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;</pre>
+<p>No olvide definir en el archivo styles.css:</p>
+<pre>@import &#39;~bootstrap/dist/css/bootstrap.min.css&#39;;</pre>
+<p>y agregar la dependencia de bootstrap al proyecto. </p>
+<h2 is-upgraded><strong>Paso 2:  Declarar el atributo que contiene los elementos</strong></h2>
+<p>Declare un atributo en la clase del componente de xyz.list.component.ts que contendrá la lista de los elementos que queremos desplegar.</p>
+<p>En nuestro ejemplo: </p>
+<pre>/**
+     * The list of editorials which belong to the BookStore
+ */ editorials: Editorial[];</pre>
+<h2 is-upgraded><strong>Paso 2:  Declarar la clase del tipo de los elementos</strong></h2>
+<p>El tipo de dato <code>Editorial</code> se debe definir. En su proyecto, defina el tipo de dato específico para su recurso.</p>
+<aside class="special"><p>Note que la clase debe coincidir con el DTO o el DetailDTO del recurso que va a desplegar.</p>
+</aside>
+<p>Esta es una clase typescript que se llamara Editorial.</p>
+<p class="image-container"><img style="width: 2633.75px" src="img/fb49c60e17ae2783.png"></p>
+<p class="image-container"><img style="width: 599.00px" src="img/4272df3c9dc3a1f0.png"></p>
+<p>La interface tiene los atributos del DTO:</p>
+<pre>export interface Editorial {
+    /**
+    * The editorial&#39;s id
+    */
+    id: number;
+
+    /**
+    * The editorial&#39;s name
+    */
+    name: string; 
+
+}</pre>
+<h2 is-upgraded><strong>Paso 3:  Importar la interface del tipo de los elementos en el componente</strong></h2>
+<p class="image-container"><img style="width: 516.00px" src="img/92fbad301c44ab8f.png"></p>
+<h2 is-upgraded><strong>Paso 4:  Iterar sobre la lista en la vista del componente</strong></h2>
+<p>Para mostrar los valores de la colección, cuando los tenga, se debe crear un ciclo en la tabla para iterar por cada elemento en la colección y crear un valor en la tabla. Así:</p>
+<pre>&lt;div class=&#34;container-fluid&#34;&gt;
+    &lt;div class=&#34;col-md-2&#34;&gt;
+        &lt;table class=&#34;table table-striped&#34;&gt;
+            &lt;thead class=&#34;thead-dark&#34;&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;Editorial Name&lt;/th&gt;    
+                &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+                &lt;tr *ngFor = &#34;let e of editorials&#34;&gt;
+                    &lt;td&gt;&#123;&#123;e.name}}&lt;/td&gt;
+                  
+                &lt;/tr&gt;
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+</pre>
+<p>Para probar que va  bien hasta ahi, dele unos valores a la colección:</p>
+<pre>editorials: Editorial[] =[{name:&#34;Siruela&#34;}, {name:&#34;Planeta&#34;}];</pre>
+<p>debe verse:</p>
+<p class="image-container"><img style="width: 391.00px" src="img/5fe2e1017ed4f346.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Crear un servicio para obtener los datos" duration="5">
+        <h2 is-upgraded><strong>Paso 1: Crear el servicio</strong></h2>
+<p>Utilizando el Angular Generator cree , en el módulo editorial un servicio y llámelo xyz (en nuestro ejemplo editorial). El generador completa el nombre y el archivo queda: editorial.service.ts</p>
+<p class="image-container"><img style="width: 572.00px" src="img/c999fea504b53ebd.png"></p>
+<p>Abra el archivo que creó y note que el servicio es una clase typescript. </p>
+<p class="image-container"><img style="width: 413.00px" src="img/bb908b392d052129.png"></p>
+<p>Esta clase contendrá la lógica del componente, es decir, los métodos para traer los valores (GET), crear valores (POST), etc. Por ahora vamos a hacer un método para traer la lista de los recursos (en nuestro ejemplo, la lista de las editoriales).</p>
+<p>Estos métodos los vamos a implementar utilizando una librería de angular llamada  <code>HttpClient.</code></p>
+<p>En la clase del servicio definimos el método:</p>
+<pre>import { Injectable } from &#39;@angular/core&#39;;
+import { HttpClient } from &#39;@angular/common/http&#39;;
+import { Editorial } from &#39;./editorial&#39;;
+import { Observable } from &#39;rxjs&#39;;
+
+const API_URL = &#39;&#39;;
+const editorials = &#39;&#39;;
+
+@Injectable()
+export class EditorialService {
+    
+    /**
+    * Constructor of the service
+    * @param http The HttpClient - This is necessary in order to perform requests
+    */
+    constructor(private http: HttpClient) { }    
+  
+    getEditorials() : Observable&lt;Editorial[]&gt; {
+        return this.http.get&lt;Editorial[]&gt;(API_URL + editorials);
+    }
+    
+}
+</pre>
+<p>Para facilitar probar nuestra aplicación, sin llamar aun al back, vamos a crear un archivo local con los datos <code>editorials.json</code> que debería devolver el back. Este archivo lo vamos a crear en una carpeta llamada assets, dentro de src:</p>
+<p class="image-container"><img style="width: 241.00px" src="img/beded0e1f8f415f9.png"></p>
+<p>El contenido del archivo es:</p>
+<pre>[{
+  &#34;id&#34;: 1,
+  &#34;name&#34;: &#34;Oveja Negra&#34;
+}, {
+  &#34;id&#34;: 2,
+  &#34;name&#34;: &#34;Siruela&#34;
+},
+{
+  &#34;id&#34;: 3,
+  &#34;name&#34;: &#34;Plaza y Janes&#34;
+},
+{
+  &#34;id&#34;: 4,
+  &#34;name&#34;: &#34;Norma&#34;
+}]
+</pre>
+<p>las variables para localizar este archivo son:</p>
+<p><code>const API_URL = &#34;../../assets/&#34;;</code></p>
+<p><code>const editorials = &#39;editorials.json&#39;;</code></p>
+<h2 is-upgraded><strong>Paso 2: Invocar el servicio</strong></h2>
+<p>El servicio se invoca desde el componente listar. debemos definir en la clase del componente listar un método que llame al servicio:</p>
+<pre>editorials: Editorial[];
+
+getEditorials(): void {
+        this.editorialService.getEditorials().subscribe(editorials =&gt; this.editorials = editorials);
+    }</pre>
+<p><strong>Paso 3: Inicializar el componente</strong></p>
+<p>El método <code>getEditorials()</code> se debe  llamar a la creación del componente. Para esto, la clase del componente debe implementar una interface <code>OnInit</code> que  define un método de inicialización ngInit. El código completo es:</p>
+<pre>import { Component, OnInit } from &#39;@angular/core&#39;;
+import { Editorial } from &#39;../editorial&#39;;
+import { EditorialService } from &#39;../editorial.service&#39;;
+
+/**
+ * The component for the list of editorials in the BookStore
+ */
+@Component({
+    selector: &#39;list-editorial&#39;,
+    templateUrl: &#39;./editorial-list.component.html&#39;, 
+})
+export class EditorialListComponent implements OnInit {
+
+    /**
+     * Constructor for the component
+     * @param editorialService The author&#39;s services provider
+     */
+    constructor(private editorialService: EditorialService) { }
+    
+    /**
+     * The list of editorials which belong to the BookStore
+     */
+    editorials: Editorial[];
+
+    /**
+     * Asks the service to update the list of editorials
+     */
+    getEditorials(): void {
+        this.editorialService.getEditorials().subscribe(editorials =&gt; this.editorials = editorials);
+    }
+
+    /**
+     * This will initialize the component by retrieving the list of editorials from the service
+     * This method will be called when the component is created
+     */
+    ngOnInit() {
+        this.getEditorials();
+    }
+}
+</pre>
+<p>Para que todo funcione se requiere actualizar el archivo App.module.ts. Para eso importe el módulo HttpClientModule e inclúyalo en la declaración de los imports.</p>
+<p class="image-container"><img style="width: 602.00px" src="img/1be36f32a413dec1.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Tutorial Formularios básicos</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="angular-create-simple"
+                  title="Tutorial Formularios básicos"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introducción" duration="2">
+        <p>Para poder realizar este taller ud debe haber leído los conceptos básicos sobre angular en el libro del curso. Tener claro:</p>
+<ol type="1" start="1">
+<li>Cuál es la estructura de un proyecto de Angular: módulos, componentes, servicios</li>
+<li>Entender la funcionalidad del Angular-Cli</li>
+</ol>
+<p>En este ejemplo vamos a crear una aplicación Angular con un componente para crear un elemento de alguno de los recursos de su aplicación. </p>
+<aside class="special"><p>El código del ejemplo está aquí:  <a href="https://stackblitz.com/edit/angular-form-simple" target="_blank">angular-form-simple</a></p>
+</aside>
+<p>El resultado del tutorial es una aplicación que tiene un formulario básico. </p>
+<p class="image-container"><img style="width: 480.00px" src="img/d9484bb012df4819.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Crear el proyecto y el módulo del recurso" duration="2">
+        <aside class="special"><p>Puede omitir este paso si ya hizo el taller de desplegar una lista de recursos y ya tiene creado un proyecto y un módulo para su recurso.</p>
+<p>El componente de crear que vamos a construir en este taller lo puede hacer dentro del módulo que ya tiene. </p>
+</aside>
+<h2 is-upgraded><strong>Paso 1: Crear el proyecto</strong></h2>
+<p>Ingrese, con su cuenta de github, a <a href="https://stackblitz.com/edit/angular-2bfbkh" target="_blank">https://stackblitz.com</a> y cree un nuevo proyecto Angular. </p>
+<h2 is-upgraded><strong>Paso 2: Importe en el módulo principal la librería de formularios</strong></h2>
+<p>La librería que vamos a utilizar para manejar los formularios se llama ReactiveFormsModule y se debe incluir así:</p>
+<p class="image-container"><img style="width: 513.00px" src="img/b166584f08a5cd65.png"></p>
+<aside class="special"><p>Importante: Esta librería se debe importar en todos los módulos que utilicen los formularios. </p>
+</aside>
+<h2 is-upgraded><strong>Paso 3: Crear el módulo nuevo</strong></h2>
+<p>Sobre la carpeta app de su proyecto seleccione la opción de Angular Generator (angular-cli) y allí Módulo:</p>
+<p class="image-container"><img style="width: 602.00px" src="img/915fd158e80672e6.png"></p>
+<p>Defina el nombre de su módulo. Por ejemplo xyz si su recurso es el recurso Xyz.</p>
+<h2 is-upgraded><strong>Paso 3: Asociar el nuevo módulo en la aplicación principal. </strong></h2>
+<p>Vaya al archivo app.module.ts y agregue el nuevo módulo. Debe hacer dos cosas: 1) Importar utilizando el nombre de la clase del nuevo módulo y asociarlo con el archivo físico. Asegúrese de escribir correctamente la ruta del archivo físico. 2) Incluir en el atributo imports del decorador del módulo, el nombre del módulo nuevo.</p>
+<p class="image-container"><img style="width: 567.00px" src="img/7fb2af923da1bffe.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Definir el componente de crear" duration="2">
+        <h2 is-upgraded><strong>Paso 1: Crear el componente dentro del módulo</strong></h2>
+<p>Vaya a la carpeta del módulo xyz (client), click derecho Angular Generator/Componente</p>
+<p>Dele el nombre xyz-create (client-create). Verifique que se crearon tres archivos dentro de una carpeta nueva xyz-create dentro de la carpeta del módulo xyz.</p>
+<p class="image-container"><img style="width: 319.00px" src="img/c5cb08a70ced1892.png"></p>
+<h2 is-upgraded><strong>Paso 2: Asociar el componente con el módulo</strong></h2>
+<p>Angular-cli crea la declaración del componente en el módulo. Sin embargo, se debe agregar una línea con el atributo <strong>exports </strong>para que este componente se pueda ver desde la aplicación principal .</p>
+<p class="image-container"><img style="width: 602.00px" src="img/e3863d22b32a43cc.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Llamar el componente de crear" duration="2">
+        <h2 is-upgraded><strong>Paso 1: Desplegar &#34;client-create works&#34;</strong></h2>
+<p>Abra el archivo de la vista del componente de listar &#34;client-create.component.html.  Allí se encuentra lo que queremos que se despliegue en la página principal.</p>
+<p class="image-container"><img style="width: 236.00px" src="img/6742795a641529e.png"></p>
+<p>Para lograrlo:</p>
+<ol type="1" start="1">
+<li>Vaya al archivo donde está definida la clase del componente &#34;client-create.component&#34; y copie la cadena que define el nombre del selector:</li>
+</ol>
+<p class="image-container"><img style="width: 344.00px" src="img/401713da6007943d.png"></p>
+<ol type="1" start="2">
+<li>En el archivo del componente principal &#34;app.component.html&#34; borre lo que hay y pegue el selector entre tags de apertura y cierre.</li>
+</ol>
+<p class="image-container"><img style="width: 288.00px" src="img/927c5ff646ca4054.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Definir el objeto formulario en el componente Crear" duration="5">
+        <h2 is-upgraded><strong>Paso 1: Crear un FormGroup</strong></h2>
+<p>Angular cuenta con librerías para manejar los formularios. Estas librerías permiten crear objetos que contienen los campos en el formulario y que serán desplegados en la vista. La librería se encarga de mantener la relación entre los campos de entrada (input) que despliega la vista y los datos en el componente. Estas librerías debemos importarlas en el componente de crear el recurso.</p>
+<pre><code>import { Component } from &#34;@angular/core&#34;;
+import { FormBuilder, FormGroup, Validators } from &#34;@angular/forms&#34;;</code></pre>
+<p>En nuestro ejemplo, vamos a implementar un formulario para crear un nuevo cliente. Este cliente tiene un atributo <code>name</code> y un atributo <code>address.</code></p>
+<p>Un objeto formulario es de tipo <code>FormGroup</code> y contiene un conjunto de objetos <code>FormControl</code> que cada uno representa un campo del formulario donde el usuario ingresará valores. </p>
+<p>En el siguiente código del componente vamos a declarar una variable <code>clientForm</code> de tipo <code>FormGroup</code>. </p>
+<pre><code>@Component({
+  selector: &#34;app-client-create&#34;,
+  templateUrl: &#34;./client-create.component.html&#34;,
+  styleUrls: [&#34;./client-create.component.css&#34;]
+})
+export class ClientCreateComponent {
+  clientForm: FormGroup;</code></pre>
+<p>Vamos a inicializar la forma <code>clientForm</code> con los elementos que la componen. Estro lo hacemos en el constructor del componente. Por cada campo de entrada, definimos un nombre y sus propiedades de validación si es que las tiene:</p>
+<pre><code>constructor(
+    private clientService: ClientService,
+    private formBuilder: FormBuilder
+  ) {
+    this.clientForm = this.formBuilder.group({
+      name: [&#34;&#34;, [Validators.required, Validators.minLength(2)]],
+      address: [&#34;&#34;, Validators.required]
+    });
+  }
+
+}</code></pre>
+<p>Estamos definiendo dos campos, FormControl. El primero tiene se llama &#34;name&#34;, su valor inicial es vacío y tiene dos validaciones: la primera dice que el campo es obligatorio y la segunda dice que el valor debe tener una longitud mínima de 2 caracteres.  El segundo campo se llama &#34;<code>address</code>&#34; , su valor inicial es vacío y tiene una validación que indica que el campo es obligatorio</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Implementar la vista del componente Crear" duration="5">
+        <h2 is-upgraded><strong>Paso 1: Crear la vista del formulario</strong></h2>
+<p>La vista del componente, es decir el código html, va en el archivo &#34;client-create.component.html&#34;.</p>
+<p>El formulario que vamos a construir es el siguiente:</p>
+<p class="image-container"><img style="width: 587.00px" src="img/4eb80fa6f0d7e4ba.png"></p>
+<p>Este formulario es un elemento form que contiene los dos inputs con sus respectivos label y el botón de submit para crear el cliente:</p>
+<p class="image-container"><img style="width: 602.00px" src="img/f6a57d44906bdbb6.png"></p>
+<p>El html correspondiente es el siguiente:</p>
+<pre><code>&lt;form [formGroup]=&#34;clientForm&#34; (ngSubmit)=&#34;createClient(clientForm.value)&#34;&gt;
+
+   &lt;div class=&#34;form-group mx-sm-3 mb-2&#34;&gt;
+    &lt;label for=&#34;name&#34;&gt;
+      Name
+    &lt;/label&gt;
+    &lt;input novalidate
+      id=&#34;name&#34;
+      class=&#34;form-control&#34;
+      formControlName=&#34;name&#34;
+      placeholder=&#34;Your Full Name&#34;&gt;
+   &lt;/div&gt;
+
+   &lt;div class=&#34;form-group  mx-sm-3 mb-2&#34;&gt;
+    &lt;label for=&#34;address&#34;&gt;
+      Address
+    &lt;/label&gt;
+   &lt;input id=&#34;address&#34; type=&#34;text&#34;
+     class=&#34;form-control&#34;
+     formControlName=&#34;address&#34;
+     placeholder=&#34;Your Address&#34;&gt;
+  &lt;/div&gt;
+
+  &lt;button class=&#34;button mx-sm-3 mb-2&#34; type=&#34;submit&#34;   
+          [disabled]=&#34;clientForm.invalid&#34;&gt;Create&lt;/button&gt;
+
+&lt;/form&gt;</code></pre>
+<p>Revisemos los elementos más importantes: </p>
+<pre><code>[formGroup]=&#34;clientForm&#34;</code></pre>
+<p>asocia con la vista del formulario, el atributo, <code>clientForm</code>, que representa los elementos del recurso que se va a crear y que fue definido en el componente. </p>
+<p>Por cada input tenemos: </p>
+<pre><code>&lt;input novalidate
+      id=&#34;name&#34;
+      class=&#34;form-control&#34;
+      formControlName=&#34;name&#34;
+      placeholder=&#34;Your Full Name&#34;&gt;</code></pre>
+<p>El significado de cada atributo es el siguiente:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><code>novalidate</code></p>
+</td><td colspan="1" rowspan="1"><p><code>Se define para impedir que se ejecuten validaciones de html normales dado que las validaciones se definen en la forma. </code></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>id=&#34;name&#34; </code></p>
+</td><td colspan="1" rowspan="1"><p><code>Identifica el campo</code></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>class=&#34;form-control&#34;</code></p>
+</td><td colspan="1" rowspan="1"><p><code>Formato de bootstrap para que quede el label y el input uno debajo del otro</code></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>formControlName=&#34;name&#34;</code></p>
+</td><td colspan="1" rowspan="1"><p><code>El nombre del campo en el objeto clientForm definido en el componente</code></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>placeholder=&#34;Your Full Name&#34;</code></p>
+</td><td colspan="1" rowspan="1"><p><code>El valor que va a aparecer por defecto</code></p>
+</td></tr>
+</table>
+<h2 is-upgraded><strong>Paso 2: Agregar en el formulario feedback al usuario</strong></h2>
+<p>Cuando una validación no se cumple, podemos agregar en el html un mensaje para el usuario. Por ejemplo, después del campo input para el nombre del cliente podemos agregar: </p>
+<pre><code>&lt;div class=&#34;alert alert-danger alert-dismissible fade show&#34;
+        *ngIf=&#34;clientForm.get(&#39;name&#39;).hasError(&#39;required&#39;) &amp;&amp; 
+      clientForm.get(&#39;name&#39;).touched&#34;&gt;
+      Name required
+&lt;/div&gt;</code></pre>
+<h2 is-upgraded><strong>Paso 3: Invocar el método de crear el Cliente asociado con el botón de submit</strong></h2>
+<p>En el elemento form, se debe incluir la acción que se realizará cuando el usuario haga clic en el botón de tipo &#34;submit&#34;:</p>
+<pre><code>&lt;form [formGroup]=&#34;clientForm&#34; (ngSubmit)=&#34;createClient(clientForm.value)&#34;&gt;
+
+   ...
+&lt;/form&gt;</code></pre>
+<p>Estamos invocando el método <code>createClient(clientForm.value)</code> que debe estar definido en la clase del componente: </p>
+<pre><code>export class ClientCreateComponent {
+  clientForm: FormGroup;
+...
+  createClient(newClient: Client) {
+    // Process checkout data here
+    console.warn(&#34;Your order has been submitted&#34;, newClient);
+
+   this.clientForm.reset();
+  }
+}</code></pre>
+<p>En este ejemplo no estamos invocando el servicio para hacer el llamado al:</p>
+<pre>POST ...api/clientes</pre>
+<p>Note que el parámetro es el objeto cliente que se obtiene de en la vista: <code>clientForm.value</code></p>
+<aside class="special"><p>El código del ejemplo está aquí:  <a href="https://stackblitz.com/edit/angular-form-simple" target="_blank">angular-form-simple</a></p>
+</aside>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
