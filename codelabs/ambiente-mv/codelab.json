@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-10-23T14:48:32Z",
+  "updated": "2020-01-29T14:51:51Z",
   "id": "ambiente-mv",
-  "duration": 12,
-  "title": "Ambiente de desarrollo para el front",
+  "duration": 25,
+  "title": "Tutorial Probar ambiente de desarrollo MV",
   "authors": "dseuniandes",
-  "summary": "En este tutorial, usted probará el ambiente de desarrollo para el proyecto front.",
-  "source": "15uBAKtLNj7KYYcuaOU5R5lxxTEXTjDfyl6fLfb4k3dI",
+  "summary": "En este tutorial, usted probará el ambiente de desarrollo para el proyecto del curso en su máquina virtual.",
+  "source": "15BLqUwV8D1xqZnqOzfpiHL7O97sGPYQROzYKmgEodFE",
   "theme": "mv",
   "status": [
     "published"
@@ -17,9 +17,6 @@
   "category": [
     "mv"
   ],
-  "tags": [
-    "ambienteisis2603"
-  ],
-  "feedback": "ambienteisis2603",
+  "tags": [],
   "url": "ambiente-mv"
 }

@@ -14,7 +14,7 @@
     "googleapis": "^43.0.0",
     "serve-index": "^1.9.1",
     "@octokit/app": "^4.1.0",
-    "@octokit/rest": "^16.28.7"
+    "@octokit/rest": "^16.40.2"
   },
   "engines": {
     "node": "^8.0"

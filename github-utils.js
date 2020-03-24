@@ -2,7 +2,7 @@ const { readFileSync, readdirSync } = require("fs");
 const {basename} = require("path");
 
 const { App } = require("@octokit/app");
-const Octokit = require("@octokit/rest");
+const {Octokit} = require("@octokit/rest");
 
 const APP_ID = process.env.APP_ID;
 const PRIVATE_KEY = readFileSync(process.env.PRIVATE_KEY_FILE, "utf8");
@@ -12,26 +12,28 @@ const octokit = new Octokit({
  async auth() {
    const installationAccessToken = await app.getInstallationAccessToken({
      installationId: process.env.INSTALLATION_ID
-   });
+   }).catch((err)=>console.log(err));
+     // console.log(`token ${installationAccessToken}`);
      return `token ${installationAccessToken}`;
    }
 });
 
 // Commit constants
 const REPO = 'codelabs';
-const OWNER = 'dalthviz';
+const OWNER = 'MOOC-tutorials';
 const BRANCH = 'staging';
 const BASE_PATH = 'codelabs/';
 const BASE = 'master';
 
 const commitFile = async (path, fileContent) => {
+   console.log(path, OWNER, REPO, BRANCH);
    const existingFile = await octokit.repos.getContents({
      owner: OWNER,
      repo: REPO,
      path,
      ref: BRANCH
    }).catch(async (err) => {
-     console.log(err);
+     //console.log(err);
      const newFile = await octokit.repos.createOrUpdateFile(
      {owner: OWNER,
       repo: REPO,
@@ -39,12 +41,14 @@ const commitFile = async (path, fileContent) => {
       path,
       content: fileContent, 
       message: 'Update ' + path,
+     }).catch((err) =>{
+       console.log("Fail creation of file");
+       console.log(err);
      });
      return newFile;
    });
   if(existingFile && existingFile.data){
-    console.log(existingFile.data.sha);
-
+    console.log(existingFile.data);
     return await octokit.repos.createOrUpdateFile(
      {owner: OWNER,
       repo: REPO,
@@ -52,7 +56,7 @@ const commitFile = async (path, fileContent) => {
       path,
       content: fileContent, 
       message: 'Update ' + path,
-      sha: existingFile.data.sha});
+      sha: existingFile.data.sha || existingFile.data.content.sha});
   }
 }
 
