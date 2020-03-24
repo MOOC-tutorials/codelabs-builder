@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>Ambiente de desarrollo para el front</title>
+  <title>Tutorial Probar ambiente de desarrollo MV</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
@@ -23,9 +23,9 @@
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="ambiente-mv"
-                  title="Ambiente de desarrollo para el front"
+                  title="Tutorial Probar ambiente de desarrollo MV"
                   environment="web"
-                  feedback-link="ambienteisis2603">
+                  feedback-link="">
     
       <google-codelab-step label="Introducción" duration="2">
         <p>Para poder realizar este taller ud debe:</p>
@@ -34,14 +34,40 @@
 <li>Tener su cuenta github asociada con su correo uniandes</li>
 <li>Haber aceptado la invitación a la organización github Uniandes-isis2603. Revise su correo con la invitación y no olvide revisar la bandeja de spam.</li>
 </ol>
-<h2 is-upgraded>Temas a tratar</h2>
+<h2 is-upgraded><strong>Temas a tratar</strong></h2>
 <ul>
+<li>Acceso a la máquina virtual con usuario estudiante</li>
 <li>Verificar que puede acceder a la organización </li>
 <li>Clonar el repositorio </li>
 <li>Abrir los proyectos</li>
-<li>Compilar la aplicación</li>
-<li>Visualizar la aplicación</li>
+<li>Construir la aplicación</li>
+<li>Desplegar la aplicación</li>
 </ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Acceso a la máquina virtual con usuario estudiante" duration="8">
+        <p>Una vez haya aprovisionado su máquina virtual debe ir a la página <a href="https://iscloud.virtual.uniandes.edu.co/" target="_blank">https://iscloud.virtual.uniandes.edu.co</a> y en la pestaña &#34;Elementos&#34; seleccionar la máquina correspondiente al curso ISIS2603.</p>
+<p>Anote la dirección IP de la máquina, la cual se puede consultar en la pestaña &#34;Red&#34;.</p>
+<p class="image-container"><img style="width: 602.00px" src="img/bc53f37be3ca26a5.png"></p>
+<p>Para conectarse a la máquina virtual, desde un equipo Windows debe abrir el programa &#34;Conexión a Escritorio Remoto&#34;. También puede usar la opción Ejecutar (Tecla Windows + R) y luego escribir &#34;mstsc&#34;.</p>
+<p class="image-container"><img style="width: 420.00px" src="img/3d9e1ebb41d5c693.png"></p>
+<p>En la ventana de conexión en la opción &#34;Equipo&#34; ingrese la IP anotada previamente.</p>
+<p class="image-container"><img style="width: 419.00px" src="img/82a60ec00c36b3f1.png"></p>
+<p>Cuando le solicite las credenciales ingrese los siguientes datos:</p>
+<ul>
+<li>En nombre de usuario: estudiante</li>
+<li>En contraseña: ISIS2603-est</li>
+</ul>
+<p>Cuando haya iniciado sesión se debe restablecer la contraseña. Para esto presione ctrl + alt + end y seleccione la opción Cambiar una contraseña</p>
+<p>Luego, siempre que inicie sesión deberá usar las siguientes credenciales:</p>
+<ul>
+<li>En nombre de usuario: estudiante</li>
+<li>En contraseña: la nueva clave ingresada</li>
+</ul>
+<aside class="special"><p>De ahora en adelante <strong>nunca debe usar otra cuenta diferente a &#34;estudiante&#34;</strong> para ingresar a su máquina virtual porque tendrá problemas durante la compilación y ejecución del proyecto.</p>
+</aside>
 
 
       </google-codelab-step>
@@ -49,10 +75,24 @@
       <google-codelab-step label="Verificar que puede acceder a Github" duration="5">
         <h2 is-upgraded>Organización github del curso</h2>
 <p>En github existe la organización <a href="https://github.com/Uniandes-isis2603" target="_blank">https://github.com/Uniandes-isis2603</a> donde se encuentran creados los grupos (teams) y los repositorios de los proyectos de cada equipo. </p>
-<p>El repositorio de su grupo para el proyecto front es s<em>X_nombreProyecto_front_201920, </em>donde X es el número de su sección y nombreProyecto es el nombre de su proyecto<em>.</em></p>
+<p>Para poder acceder a su repositorio ud debe:</p>
+<ol type="1" start="1">
+<li>Aceptar la invitación que le llegó de github en donde se le pedía ser parte de un team llamado <em>202010_SX_EY_nombreProyecto</em> (donde la <em>X</em> corresponde al número de su sección, <em>Y</em> al número de su equipo y <em>nombreProyecto</em> al nombre abreviado del enunciado de su proyecto). </li>
+<li>Una vez que acepte la invitación, debe poder ver el repositorio de su grupo. El nombre de este repositorio es: <em>202010_SX_EY_nombreProyecto</em>. </li>
+</ol>
 <aside class="special"><p>El repositorio para el proyecto de su equipo es privado y solo puede ser visto por los integrantes del equipo que hayan aceptado la invitación. </p>
-<p>Si no puede ver su repositorio, por la razón que sea, y mientras resuelve el problema,  puede realizar este tutorial con el repositorio <em>front-pregrado201910</em>, que está en la misma organización y es público; de este modo podrá probar el ambiente de su máquina. </p>
+<p>Si no puede ver su repositorio, por la razón que sea, y mientras resuelve el problema,  puede realizar este tutorial con el repositorio <a href="https://github.com/Uniandes-isis2603/backstepbystep" target="_blank"><em>backstepbyste</em>p</a>, que está en la misma organización y es público; de este modo podrá probar el ambiente de su máquina. </p>
 </aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configurar usuario de github en la máquina virtual" duration="5">
+        <p>Se requiere configurar, desde la línea de comandos de la máquina virtual, el usuario que hace los commits en git.</p>
+<p>Si esto no se hace todos los commits aparecerán realizados por el usuario &#34;estudiante&#34;; por tanto, no será posible argumentar la autoría de los commits y esto tendrá un impacto negativo en el seguimiento semanal del proyecto.</p>
+<p>Una vez haya abierto la línea de comandos ingrese las siguientes instrucciones:</p>
+<p><code>git config --global user.name &#34;su nombre&#34;</code></p>
+<p><code>git config --global user.email sulogin@uniandes.edu.co</code>  </p>
 
 
       </google-codelab-step>
@@ -62,50 +102,87 @@
 <p>Para clonar un repositorio de github, es decir crear una copia en su máquina del repositorio en github y guardar información para su posterior sincronización, ud debe:</p>
 <ol type="1" start="1">
 <li>Estar logueado en la máquina virtual con el usuario estudiante</li>
-<li>Estar ubicado en una carpeta donde va a crear la copia del repositorio. </li>
-<li>La carpeta debe estar ubicada en el directorio raíz en una ruta que no contenga espacios</li>
-<li>Tener la url del repositorio front que va a clonar</li>
-<li>Tener instalado en la máquina donde va a clonar un cliente de git. </li>
+<li>Estar ubicado en una carpeta donde va a crear la copia del repositorio</li>
+<li>Tener la url del repositorio que va a clonar</li>
+<li>Tener instalado en la máquina donde va a clonar un cliente de git. Este puede ser git, github cliente, o el cliente que viene por defecto con Netbeans.</li>
 </ol>
-<p>Para el caso del proyecto del curso, en su máquina virtual ya está instalado un cliente de git (en la línea de comandos).</p>
-<h2 is-upgraded>U<strong>RL del repo que se va a clonar</strong></h2>
-<p>En github.com localice el repositorio que va a clonar, seleccione &#34;Clone or download&#34; y copie la url.</p>
+<p>Para el caso del proyecto del curso, en su máquina virtual ya está instalado tanto el cliente de git (en la línea de comandos) como el IDE Netbeans que tiene un cliente de git. </p>
+<p>En el siguiente video se explica cómo clonar desde Netbeans un repositorio github. Siga las instrucciones pero utilice la url del repositorio que va a clonar. </p>
+<p><a href="https://www.youtube.com/watch?v=u40pEwLqJd0" target="_blank">Clonar desde netbeans</a></p>
+<h2 is-upgraded><strong>URL del repo que se va a clonar</strong></h2>
+<p>En github.com localice el repositorio que va a clonar, seleccione &#34;Clone or download&#34; y copie la url: </p>
+<p class="image-container"><img style="width: 602.00px" src="img/d2d4668cc12117f9.png"></p>
+<h2 is-upgraded><strong>Clonar desde Netbeans</strong></h2>
+<p>Desde Netbeans seleccione en el menú superior Teams &gt; Git &gt; Clone:</p>
+<p class="image-container"><img style="width: 602.00px" src="img/e41a24549ef58bb9.png"></p>
+<p>En la imagen está señalada: la url de repositorio, las credenciales para ingresar a github (que debe cambiar por sus propias credenciales), la carpeta en su máquina donde quedará el repositorio que está clonando.</p>
 <h2 is-upgraded><strong>Clonar desde línea de comandos</strong></h2>
 <p>Desde una línea de comandos vaya a la carpeta de su preferencia e ingrese el comando </p>
-<p><strong>git clone url</strong></p>
-<p>donde <em>url </em>corresponde a la dirección del repositorio (por ejemplo, https://github.com/Uniandes-isis2603/s4_Servicios_front_201920.git<strong>)</strong></p>
+<p>git clone url</p>
+<p>donde url corresponde a la dirección del repositorio (por ejemplo, https://github.com/Uniandes-isis2603/s4_Servicios_201920.git<strong>)</strong></p>
 <p>Luego aparecerá una ventana emergente en la que se le pedirán las credenciales de github.</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Abrir el proyecto" duration="0">
-        <p>Para abrir el proyecto se sugiere tener instalado Visual Studio Code, el cual lo puede descargar desde esta dirección: <a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a></p>
-<p>Una vez haya instalado Visual Studio Code, abra la carpeta en donde clonó el proyecto.</p>
-<p class="image-container"><img style="width: 602.00px" src="img/a3a6425a2d51fd1f.png"></p>
+      <google-codelab-step label="Abrir los proyectos" duration="0">
+        <p>Una vez finalizada la clonación ud debe abrir los tres proyectos, como se muestra en la imagen:</p>
+<p class="image-container"><img style="width: 602.00px" src="img/754db1ce101e20bc.png"></p>
+<p>El proyecto principal, que para este ejemplo se llama <code>s1_incidentes</code>, contiene dos módulos (que son a su vez proyectos): uno contendrá el código de la capa de <code>servicios o API Rest</code> y el otro el <code>back</code> que contendrá tanto  la capa de <code>lógi</code>ca como la de la <code>persistencia.</code></p>
+<p class="image-container"><img style="width: 602.00px" src="img/72a4cb5321758ab1.png"></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Instalar Angular en la máquina virtual" duration="0">
-        <p>En Visual Studio Code, abra una nueva terminal e ingrese el comando npm install -g @angular/cli </p>
-<p>Esto instalará Angular.</p>
+      <google-codelab-step label="Construir la aplicación" duration="0">
+        <p>Construir (<strong>build</strong>) la aplicación es un proceso que empaqueta en un zip, siguiendo una estructura predefinida, el proyecto compilado y todos los archivos de configuración que se necesitan para que se pueda ejecutar.</p>
+<p>Este proceso de construcción se hace automáticamente seleccionado el proyecto principal, haciendo click derecho y luego <strong>Clean and build</strong></p>
+<p class="image-container"><img style="width: 378.00px" src="img/c2b967ee713151a2.png"></p>
+<p>La primera vez que se hace este proceso se puede tardar un tiempo considerable ya que se van a descargar, localmente,  las librerías que se necesitan para el proyecto. </p>
+<p>AL finalizar el proceso de descargue y compilación de las fuentes, debe aparecer el mensaje &#34;BUILD SUCCESS&#34;.</p>
+<p class="image-container"><img style="width: 559.00px" src="img/5a9195f1fc9f31f8.png"></p>
+<p>El resultado del empaquetado ud lo puede ver en la vista &#34;Files&#34; en el proyecto <strong>-api</strong> en la carpeta <em>target</em> como se muestra en la figura:</p>
+<p class="image-container"><img style="width: 361.00px" src="img/e8d63f751ef3a3c3.png"></p>
+<p>Note que el archivo tiene extensión war (<strong>w</strong>eb <strong>ar</strong>chive). Si lo abre, puede notar que contiene archivos java compilados (.class) y archivos de configuración (.xml).</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Instalar dependencias y compilar la aplicación" duration="0">
-        <p>En Visual Studio Code, abra una nueva terminal e ingrese el comando npm install. Esto instalará las dependencias necesarias.</p>
-<p class="image-container"><img style="width: 602.00px" src="img/ece593a98cd32d4c.png"></p>
-<p>Para ejecutar la aplicación, desde la misma terminal e ingrese el comando ng serve</p>
-<p class="image-container"><img style="width: 594.00px" src="img/cdd089fb1be96a4a.png"></p>
+      <google-codelab-step label="Desplegar la aplicación" duration="0">
+        <p>Desplegar la aplicación significa mover el empaquetado que se construyó en el paso anterior al servidor de aplicaciones donde se ejecutará. </p>
+<p>En el ambiente de desarrollo local ejecutaremos un servidor de aplicaciones llamado <em>payara </em>(en el puerto 8080) y allí desplegamos la aplicación.</p>
+<p>Ya está configurado en Netbeans el comando que lanza el servidor y que mueve el empaquetado dentro de éste. Para ejecutar este comando, seleccionamos el proyecto -api , click derecho y damos Run. </p>
+<p class="image-container"><img style="width: 395.00px" src="img/d5efe142730707f9.png"></p>
+<p>La primera vez, antes de crear la base de datos vamos a obtener un error (el false de la última línea).</p>
+<p class="image-container"><img style="width: 602.00px" src="img/e5f289fd4b765911.png"></p>
+<p>Para saber cuál fue el error debemos ir a la pestaña de Payara Server e identificar el problema. En la imágen siguiente, vemos que la base de datos del proyecto no existe (en el ejemplo, está buscando una base de datos llamada incidentes).</p>
+<p class="image-container"><img style="width: 602.00px" src="img/a6360290c409d505.png"></p>
+<p>Para resolver el problema debemos crear la base de datos. Para esto vamos a la pestaña Services y allí seleccionamos, sobre Java DB, create Database:</p>
+<p class="image-container"><img style="width: 351.00px" src="img/d89a0ea1da3b3d0e.png"></p>
+<p>Escribimos el nombre. No hay necesidad de definir seguridad sobre esta base de datos dado que se trata de una base de datos local en nuestra propia máquina. </p>
+<p class="image-container"><img style="width: 522.00px" src="img/5f686c632df274cc.png"></p>
+<p>Al ejecutar nuevamente el comando Run, podemos ver que el despliegue se realizó de manera correcta. </p>
+<p class="image-container"><img style="width: 602.00px" src="img/d967bafb55392af5.png"></p>
+<p>Adicionalmente, se abrirá una nueva ventana del navegador que muestra el siguiente mensaje, indicando que todo está OK.</p>
+<p class="image-container"><img style="width: 457.00px" src="img/a4866d329738bc19.png"></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Visualizar la aplicación" duration="0">
-        <p>Vaya a un navegador e ingrese la dirección <a href="http://localhost:4200" target="_blank">http://localhost:4200</a></p>
-<p class="image-container"><img style="width: 602.00px" src="img/e259d316bfa9e8ea.png"></p>
+      <google-codelab-step label="Preguntas Frecuentes" duration="0">
+        <h2 is-upgraded><strong>Olvide la IP de mi MV y no sé dónde buscarla.</strong></h2>
+<p>Vaya a <a href="https://iscloud.virtual.uniandes.edu.co/vcac" target="_blank">https://iscloud.virtual.uniandes.edu.co/vcac</a> ingrese con su login y su clave de labsis. Recuerde que el login debe ir después de<strong> sis\</strong>  ejemplo:</p>
+<pre>login sis\af.carrero45</pre>
+<p>Vaya a Elementos y busque la información de Red</p>
+<p class="image-container"><img style="width: 602.00px" src="img/8a516306ab1c7997.png"></p>
+<h2 is-upgraded><strong>Es importante ingresar con login Estudiante a mi MV?</strong></h2>
+<p>Si. De lo contrario no tendrá el ambiente completo instalado. Vaya al paso 2 de este tutorial donde se explica cómo ingresar con la cuenta Estudiante.</p>
+<h2 is-upgraded><strong>Trato de ejecutar Clean&amp;Build y me sale el error: </strong></h2>
+<h2 is-upgraded><code>Failed to execute goal org.apache.maven.plugins:maven-clean-plugin:2.4.1:clean</code></h2>
+<p>Esto se debe a que se intenta borrar el archivo que está desplegado (con el comando Clean) pero el servidor de aplicaciones Payara lo tiene abierto. Para resolver el problema debe primero detener el servidor dando clic en el botón rojo como se muestra en la figura: </p>
+<p class="image-container"><img style="width: 602.00px" src="img/1d73c64e8af84e28.png"></p>
+<h2 is-upgraded>Después de clonar los proyectos, al abrirlos en Netbeans, sale al lado del nombre un <code>Unloadable</code><strong> </strong></h2>
+<p>Probablemente Ud. ingresó a su máquina virtual con su login y no con el <code>login=Estudiante</code></p>
 
 
       </google-codelab-step>

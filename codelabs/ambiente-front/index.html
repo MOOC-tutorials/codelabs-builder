@@ -49,19 +49,10 @@
       <google-codelab-step label="Verificar que puede acceder a Github" duration="5">
         <h2 is-upgraded>Organización github del curso</h2>
 <p>En github existe la organización <a href="https://github.com/Uniandes-isis2603" target="_blank">https://github.com/Uniandes-isis2603</a> donde se encuentran creados los grupos (teams) y los repositorios de los proyectos de cada equipo. </p>
-<p>El repositorio de su grupo para el proyecto front es s<em>X_nombreProyecto_front_201920, </em>donde X es el número de su sección y nombreProyecto es el nombre de su proyecto<em>.</em></p>
+<p>El repositorio de su grupo para el proyecto front es 202010_SX_EY_nombreProyecto<em>, </em>donde <em>X</em> es el número de su sección, <em>Y</em> es el número de su equipo y <em>nombreProyecto</em> es el nombre abreviado de su proyecto<em>.</em></p>
 <aside class="special"><p>El repositorio para el proyecto de su equipo es privado y solo puede ser visto por los integrantes del equipo que hayan aceptado la invitación. </p>
-<p>Si no puede ver su repositorio, por la razón que sea, y mientras resuelve el problema,  puede realizar este tutorial con el repositorio <em>front-pregrado201910</em>, que está en la misma organización y es público; de este modo podrá probar el ambiente de su máquina. </p>
+<p>Si no puede ver su repositorio, por la razón que sea, y mientras resuelve el problema,  puede realizar este tutorial con el repositorio <em>front-pregrado201920</em>, que está en la misma organización y es público; de este modo podrá probar el ambiente de su máquina. </p>
 </aside>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Instalar Angular en la máquina virtual" duration="0">
-        <p>Abra una nueva terminal, vaya a la ruta C:\Users\Estudiante (cd C:\Users\Estudiante) e ingrese el comando npm install -g @angular/cli </p>
-<p>Esto instalará Angular y solo será necesario hacerlo una vez.</p>
-<p>Para garantizar que pueda tener acceso a los comandos de Angular, debe incluir la ruta de instalación en las variables de entorno del sistema. Para esto, vaya a Panel de control &gt; Sistema y seguridad &gt; Sistema &gt; Configuración avanzada del sistema. Luego seleccione Variables de entorno. En el panel Variables de usuario para estudiante seleccione la variable Path y haga clic en editar. Sin borrar los datos que están allí, vaya al final de la línea, coloque punto y coma y agregue la ruta &#34;C:\Users\Estudiante\AppData\Roaming\npm&#34;.          </p>
-<p class="image-container"><img style="width: 851.13px" src="img/c1707c8144a63d79.png"></p>
 
 
       </google-codelab-step>
@@ -72,17 +63,15 @@
 <ol type="1" start="1">
 <li>Estar logueado en la máquina virtual con el usuario estudiante</li>
 <li>Estar ubicado en una carpeta donde va a crear la copia del repositorio. </li>
-<li>La carpeta debe estar ubicada en el directorio raíz en una ruta que no contenga espacios</li>
+<li>La carpeta debe estar ubicada en el directorio raíz en <strong>una ruta que no contenga espacios</strong></li>
 <li>Tener la url del repositorio front que va a clonar</li>
-<li>Tener instalado en la máquina donde va a clonar un cliente de git. </li>
 </ol>
-<p>Para el caso del proyecto del curso, en su máquina virtual ya está instalado un cliente de git (en la línea de comandos).</p>
 <h2 is-upgraded>U<strong>RL del repo que se va a clonar</strong></h2>
 <p>En github.com localice el repositorio que va a clonar, seleccione &#34;Clone or download&#34; y copie la url.</p>
 <h2 is-upgraded><strong>Clonar desde línea de comandos</strong></h2>
 <p>Desde una línea de comandos vaya a la carpeta de su preferencia e ingrese el comando </p>
 <p><strong>git clone url</strong></p>
-<p>donde <em>url </em>corresponde a la dirección del repositorio (por ejemplo, https://github.com/Uniandes-isis2603/s4_Servicios_front_201920.git<strong>)</strong></p>
+<p>donde <em>url </em>corresponde a la dirección del repositorio (por ejemplo, <a href="https://github.com/Uniandes-isis2603/202010_S3_E1_VecindarioAmigo_Front.git" target="_blank">https://github.com/Uniandes-isis2603/202010_S3_E1_VecindarioAmigo_Front.git</a><strong>)</strong></p>
 <p>Luego aparecerá una ventana emergente en la que se le pedirán las credenciales de github.</p>
 
 
@@ -91,23 +80,22 @@
       <google-codelab-step label="Abrir el proyecto" duration="0">
         <p>Para abrir el proyecto se sugiere tener instalado Visual Studio Code, el cual lo puede descargar desde esta dirección: <a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a></p>
 <p>Una vez haya instalado Visual Studio Code, abra la carpeta en donde clonó el proyecto.</p>
-<p class="image-container"><img style="width: 602.00px" src="img/a3a6425a2d51fd1f.png"></p>
+<p class="image-container"><img style="width: 602.00px" src="img/cb71bdd0672f3f4.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Instalar dependencias y compilar la aplicación" duration="0">
-        <p>En Visual Studio Code, abra una nueva terminal y asegúrese de que está en la raíz de su proyecto. Luego, ingrese el comando npm install. Esto instalará las dependencias necesarias.</p>
-<p class="image-container"><img style="width: 602.00px" src="img/ece593a98cd32d4c.png"></p>
-<p>Para ejecutar la aplicación, desde la misma terminal e ingrese el comando ng serve</p>
-<p class="image-container"><img style="width: 594.00px" src="img/cdd089fb1be96a4a.png"></p>
+        <p>En Visual Studio Code, abra una nueva terminal y asegúrese de que está en la raíz de su proyecto. Luego, ingrese el comando <code>npm install</code>. Esto instalará las dependencias necesarias.</p>
+<p class="image-container"><img style="width: 602.00px" src="img/f33ec75d303a0a37.png"></p>
+<p>Para ejecutar la aplicación, desde la misma terminal e ingrese el comando <code>ng serve</code></p>
+<p class="image-container"><img style="width: 594.00px" src="img/923623b8ca0d1f92.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Visualizar la aplicación" duration="0">
         <p>Vaya a un navegador e ingrese la dirección <a href="http://localhost:4200" target="_blank">http://localhost:4200</a></p>
-<p class="image-container"><img style="width: 602.00px" src="img/e259d316bfa9e8ea.png"></p>
 
 
       </google-codelab-step>

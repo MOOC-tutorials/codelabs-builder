@@ -1,0 +1,99 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Proyecto git: Mantenimiento de un sitio web estático (aceptación de una petición de validación - Pull Request)</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="git-static-web-pr"
+                  title="Proyecto git: Mantenimiento de un sitio web estático (aceptación de una petición de validación - Pull Request)"
+                  environment="web"
+                  feedback-link="https://github.com/MOOC-tutorials/git_web_practice_pr">
+    
+      <google-codelab-step label="Introducción al proyecto y pasos previos" duration="5">
+        <p>En este proyecto vamos a practicar la corrección y gestión de aceptación de cambios en un repositorio que contiene un sitio web estático. La tarea consiste en realizar el mantenimiento de un repositorio incluyendo la aceptación de peticiones de validación (<strong><em>pull requests</em></strong>) para la corrección de una página web estática. Igualmente, parte del trabajo a realizar es ayudar en la corrección del sitio que presenta múltiples errores. Es prioridad del equipo lograr corregirlos.</p>
+<p>El código se encuentra disponible en Github y a continuación se explica brevemente la configuración del ambiente de desarrollo necesaria para poder comenzar a trabajar. Posteriormente se explica la dinámica de trabajo sobre el repositorio y lo que se espera realizar en conjunto con el equipo automático.</p>
+<h2 is-upgraded><strong>Antes de comenzar</strong></h2>
+<ul>
+<li>Asegúrese de tener una <a href="https://github.com/" target="_blank">cuenta en Github</a> y tener la sesión iniciada.</li>
+<li>Asegurese de tener <a href="https://git-scm.com/download" target="_blank">Git </a>instalado.</li>
+<li>Se recomienda usar algún editor de archivos con manejo de sintaxis. Una opción recomendada es usar <a href="https://code.visualstudio.com/Download" target="_blank">Visual Studio Code</a>.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configuración del ambiente de desarrollo y equipo automatizado" duration="0">
+        <h2 is-upgraded><strong>Primeros pasos</strong></h2>
+<ul>
+<li>Ir a <a href="https://github.com/MOOC-tutorials/git_web_practice_pr" target="_blank">https://github.com/MOOC-tutorials/git_web_practice_pr</a> </li>
+<li>Dar clic sobre el botón de <img style="width: 58.00px" src="img/88b0928d30358aba.png"></li>
+<li>Confirmar que ahora tenga dentro de su cuenta un nuevo repositorio con el sitio web estático base con el nombre <strong><em>git_web_practice_pr</em></strong></li>
+</ul>
+<h2 is-upgraded><strong>Clonando el repositorio</strong></h2>
+<ul>
+<li>En su repositorio <strong><em>git_web_practice_pr </em></strong>en Github, hacer clic en <img style="width: 133.00px" src="img/425952c7975a747d.png"></li>
+<li>Copiar la URL dada. Puede usar el botón<img style="width: 36.00px" src="img/dc95111c186090c8.png"> (este botón copiará en su portapapeles la URL que se necesita).</li>
+<li>En su terminal/consola ubicarse en el directorio en que desea que se clone el repositorio usando el comando <code>cd</code>.</li>
+<li>En su terminal/consola escribir <code>git clone &lt;URL del repositorio&gt;</code>.</li>
+<li>Cambiar el directorio activo (<code>cd</code>) a la carpeta raíz del repositorio. Ejecutando <code>cd git_web_practice_pr</code> debería bastar.</li>
+</ul>
+<h2 is-upgraded><strong>Configuración de permisos al equipo de trabajo automático para crear peticiones de validación (Pull Requests)</strong></h2>
+<ul>
+<li>Instalar la Github App disponible en <a href="https://github.com/apps/static-web-project" target="_blank">https://github.com/apps/static-web-project</a> </li>
+<li>Clic en <img style="width: 305.00px" src="img/cff5067798c787c7.png"></li>
+<li>Seleccionar su cuenta (donde fue creado el repositorio <strong><em>git_web_practice_pr</em></strong>)</li>
+<li>Seleccionar, hacer clic sobre<img style="width: 205.00px" src="img/486c742044614b35.png">y seleccionar el repositorio <strong><em>git_web_practice_pr</em></strong>. Clic en <img style="width: 88.00px" src="img/fc4a1a6459e5ef60.png"></li>
+</ul>
+<p>Ahora, debería observar una pantalla como la siguiente:</p>
+<p class="image-container"><img style="width: 586.50px" src="img/272abb627e419ac0.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Proyecto: Gestión del repositorio" duration="30">
+        <p>En este momento debería de contar con una copia local del repositorio con el código de la página web estática. Partiendo de esto ahora podrá hacer los cambios necesarios para corregir los errores. La idea general es arreglar este sitio teniendo en cuenta las instrucciones que irán apareciendo en la sección de <strong><em>issues </em></strong>en el repositorio en Github. Por cada arreglo especificado es necesario hacer un <strong><em>commit</em></strong>. Además, luego de cada <strong><em>commit, </em></strong>debe subir sus cambios locales mediante un <strong><em>push</em></strong> al repositorio remoto. Es importante tener en cuenta que al mismo tiempo que correcciones se realizan, el equipo automático también propondrá cambios para la corrección de errores.</p>
+<h2 is-upgraded><strong>Instrucciones sobre los errores a corregir y la aceptación de peticiones de validación de cambios</strong></h2>
+<p>Podrá ir observando los elementos a corregir en el repositorio en Github (aparecerán dentro de los issues asignados con el tag <strong><em>bug</em></strong>). Para empezar a trabajar, es necesario dirigirse a la sección de issues de su repositorio. Allí encontrará el error primer error asignado a corregir. Por otro lado, los miembros del equipo automático crearán peticiones de validación para contribuir con la corrección del sitio web estático a medida que se realicen las correcciones.</p>
+<p>En general, a partir de este momento cualquier información o acción a realizar sobre el repositorio será reportada mediante un issue en la sección correspondiente en Github del repositorio.</p>
+<aside class="special"><p><strong>Para el correcto desarrollo de la actividad, tenga en cuenta cada uno de los siguientes puntos:</strong></p>
+<ul>
+<li><em>Por cada error se debe realizar un commit cuyo comentario siga la convención: </em><strong>&lt;</strong><strong><em>FIX ID&gt;: &lt;Comentario&gt;. </em></strong><em>Por ejemplo para el </em><strong><em>ISSUE 1</em></strong><em> un comentario adecuado para el commit de resolución sería:</em><strong><em> FIX1: Corrección de páginas 1 y 5</em></strong></li>
+</ul>
+<p><strong>Cumplir con esta convención es de suma importancia para el desarrollo de la actividad y la recepción de una correcta retroalimentación.</strong></p>
+<ul>
+<li><em>Serán asignados tres (3) issues a trabajar. Al finalizar un issue, el equipo automático podrá proponer algunos cambios faltantes para corregir totalmente el sitio los cuales deberán ser revisados y aceptados (</em>deberá realizar <strong><em>merge </em></strong>de los mismos a la rama <strong><em>master</em></strong><em>).</em></li>
+<li><em>Por otro lado,  si la corrección no es la esperada, se informará de esta situación buscando que se realice una revisión y los cambios que correspondan, además de necesitar volver a realizar un commit con los cambios.</em></li>
+</ul>
+</aside>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
