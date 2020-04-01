@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-03-27T14:46:22Z",
+  "id": "pull_web_practice",
+  "duration": 35,
+  "title": "Proyecto git: Contribución a un proyecto (creación de una petición de validación - Pull Request)",
+  "authors": "Daniel Althviz",
+  "summary": "Proyecto git: Contribución a un proyecto (creación de una petición de validación - Pull Request)",
+  "source": "1OatgEUsovSmNslJePY_V-DAWdSovoOzt_xef6t6ihd4",
+  "theme": "git",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "git"
+  ],
+  "tags": [
+    "git",
+    "tutorial",
+    "web"
+  ],
+  "feedback": "https://github.com/MOOC-tutorials/pull_web_practice",
+  "url": "pull_web_practice"
+}

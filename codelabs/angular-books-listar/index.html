@@ -1,0 +1,403 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Tutorial Desplegar Lista de Books</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="angular-books-listar"
+                  title="Tutorial Desplegar Lista de Books"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introducción" duration="2">
+        <p>Este tutorial lo guía, usando <code>VSCode</code>, en la construcción de una aplicación Angular compuesta del módulo principal y de un módulo llamado <code>BookModule</code> el cual declara un componente <code>BokkListarComponent</code> para desplegar el catálogo de libros que está en la aplicación del curso <a href="https://github.com/Uniandes-isis2603/backstepbystep" target="_blank">backstepbystep</a>. </p>
+<p>Los pasos que siguen son:</p>
+<aside class="special"><p>El código del ejemplo está en este repositorio:  </p>
+<p>Nota: Antes de revisar la solución trate de desarrollar el ejemplo, paso a paso siguiendo este tutorial.</p>
+</aside>
+<p>El resultado final del tutorial es una aplicación que despliega la siguiente lista (Figura 1):</p>
+<p><strong><code>Figura 1</code></strong></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Prerrequisitos" duration="0">
+        <p>Antes de realizar este tutorial Ud. ya desarrolló el tutorial  <a href="https://codelabs-builder.glitch.me/codelabs/angular-courses-basico/index.html#0" target="_blank">Lista de cursos</a>. Allí se explican varios conceptos que no se retoman aquí. </p>
+<p>En particular Ud. debe:</p>
+<ol type="1" start="1">
+<li>Tener instalado el ambiente: VSCode, TS, Angular</li>
+<li>Saber cómo se instala Bootstrap en el proyecto</li>
+<li>Saber cómo se crean módulos, componentes, servicios utilizando el angular-cli en VSCode. </li>
+</ol>
+<p>Para ejecutar el resultado final de este taller Ud. debe tener en ejecución sobre payara, el proyecto <a href="https://github.com/Uniandes-isis2603/backstepbystep" target="_blank">backstepbystep</a>. No olvide inicializar la base de datos y ejecutar el sql que inserta los datos. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Crear el proyecto y el módulo del recurso book" duration="2">
+        <h2 is-upgraded><strong>Paso 1: Crear el proyecto</strong></h2>
+<p>Cree una aplicación Angular que se llame, por ejemplo, <code>book</code>, siguiendo las instrucciones que se encuentran <a href="https://github.com/Uniandes-isis2603/recursos-isis2603/wiki/vscodeangular" target="_blank">aquí</a>.</p>
+<p>Abra su aplicación en <code>VSCode</code> borre el contenido del archivo <code>app.component.html.</code></p>
+<h2 is-upgraded><strong>Paso 2: Crear un nuevo módulo </strong></h2>
+<p>Para crear el nuevo módulo utilizamos la aplicación <code>angular-cli</code> que está integrada dentro de <code>VSCode</code>. </p>
+<p>Para esto, vaya a la carpeta <code>src/app</code>, clic derecho, <code>Generate Module</code>. El nombre del nuevo módulo es <code>book</code>.  </p>
+<h2 is-upgraded><strong>Paso 2: Borre el componente por defecto</strong></h2>
+<p>Al crear el nuevo módulo <code>book</code>, se generó un componente por defecto <code>BookComponent</code>. </p>
+<p>Para eliminar ese componente que no vamos a utilizar debe borrar los siguientes archivos:</p>
+<p><code>book.component.ts</code></p>
+<p><code>book.component.css</code></p>
+<p><code>book.component.html</code></p>
+<p>Borre referencias a este componente en el archivo <code>book.module.ts</code> que debe quedar así:</p>
+<pre><code>import { NgModule } from &#39;@angular/core&#39;;
+import { CommonModule } from &#39;@angular/common&#39;;
+@NgModule({
+  imports: [
+    CommonModule
+  ],
+  declarations: []
+})
+export class BookModule { }</code></pre>
+<p class="image-container"><img style="width: 473.00px" src="img/9d9cbac4688b3cc1.png"></p>
+<h2 is-upgraded><strong>Paso 3: Incluir el nuevo módulo en el principal</strong></h2>
+<p>Para que la aplicación pueda utilizar el nuevo módulo, este se debe importar en el módulo principal  <code>AppModule</code> (archivo <code>app.module.ts</code>).</p>
+<p>Para importar en el módulo principal el módulo de <code>BookModule</code> se debe realizar dos cosas:</p>
+<ol type="1" start="1">
+<li>Ir al decorador e incluir en el arreglo del atributo <code>imports</code> el nombre del módulo, es decir, de la clase <code>BookModule</code></li>
+</ol>
+<ul>
+<li>Incluir el nombre del archivo donde está la definición (esto debió hacerse automáticamente si Ud. tiene las extensiones de Angular instaladas): </li>
+</ul>
+<p><code>import { BookModule } from &#39;./book/book.module&#39;;</code></p>
+<h2 is-upgraded><strong>Paso 4: Crear el componente de listar</strong></h2>
+<p>Vaya sobre la carpeta del módulo <code>src/app/book</code>, clic derecho <code>Generate Component</code> y escriba por nombre <code>book-listar. </code></p>
+<p>Dentro de la carpeta  <code>src/app/book</code> se debió crear:</p>
+<h2 is-upgraded><strong>Paso 5: Declarar y exportar el componente en el módulo</strong></h2>
+<ul>
+<li>Vaya al módulo <code>BookModule</code> (<code>book.module.ts</code>) y agregue en el decorador, en el atributo declarations, el nombre del nuevo componente <code>BookListarModule</code> . </li>
+<li>Agregue un nuevo atributo en el decorador llamado exports cuyo valor es un arreglo que contiene el nombre del nuevo módulo (lo exportamos porque lo vamos a utilizar desde el componente principal de la aplicación).</li>
+<li>Verifique que el archivo donde está definido el módulo se agregó en los import al comienzo. </li>
+</ul>
+<p>El resultado es:</p>
+<pre><code>import { NgModule } from &#39;@angular/core&#39;;
+import { CommonModule } from &#39;@angular/common&#39;;
+import { BookListarComponent } from &#39;./book-listar/book-listar.component&#39;;
+
+
+@NgModule({
+  imports: [
+    CommonModule
+  ],
+  declarations: [BookListarComponent],
+  exports: [BookListarComponent],
+})
+export class BookModule { }</code></pre>
+<h2 is-upgraded><strong>Paso 6: Invocar el  componente </strong></h2>
+<p>Para invocar el componente de los libros dentro del HTML del componente principal.</p>
+<ol type="1" start="1">
+<li>Buscamos el nombre del selector de <code>BookListarComponent</code>. Vamos al archivo <code>book-listar-component.ts</code> y en del decorador del componente buscamos el valor del atributo <code>selector</code>.</li>
+<li>Lo utilizamos en <code>app.component.html. Escríbalo en la segunda línea.</code></li>
+</ol>
+<p class="image-container"><img style="width: 495.00px" src="img/1118caebdb6a4cd4.png"></p>
+<p>Volvemos a ejecutar la aplicación y obtenemos. </p>
+<p class="image-container"><img style="width: 261.00px" src="img/893cde77d2c3dc09.png"></p>
+<p>Definir el  Modelo del componente </p>
+<h2 is-upgraded><strong>Paso 1: Definir la estructura del modelo</strong></h2>
+<p class="image-container"><img style="width: 253.50px" src="img/947710564c7ee239.png"></p>
+<h3 is-upgraded><strong>Crear la clase Book</strong></h3>
+<h3 is-upgraded><strong>Crear la clase Editorial</strong></h3>
+<p>crear el módulo, asociarlo con el módulo principal</p>
+<p>crear la clase Editorial</p>
+<h2 is-upgraded><strong>Paso 2: Asociar el modelo con el componente</strong></h2>
+<p>Ahora que tenemos la clase que representa los libros, podemos declarar, dentro de la clase del componente, un arreglo para los libros:</p>
+<pre><code>private books: Array&lt;Book&gt;; </code></pre>
+<p>Nos aparece que <code>Course</code> no está definido, entonces debemos importarlo:</p>
+<pre><code>import { Component, OnInit } from &#39;@angular/core&#39;;
+import { Book } from &#39;../book&#39;;
+@Component({
+  selector: &#39;app-book-listar&#39;,
+  templateUrl: &#39;./book-listar.component.html&#39;,
+  styleUrls: [&#39;./book-listar.component.css&#39;]
+})
+export class BookListarComponent implements OnInit {
+  constructor() { }
+  private books: Array&lt;Book&gt;;
+  ngOnInit() {
+  }
+}</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Crear el servicio para obtener los libros del back-end" duration="0">
+        <h2 is-upgraded><strong>Paso 1: Crear la clase del servicio </strong></h2>
+<p>Vamos a crear  la clase del servicio desde la carpeta <code>book</code>. De nuevo usamos <code>angular-cli</code> y seleccionado <code>Generate Service.</code> Como nombre solo escribimos <code>book.</code></p>
+<p>El  archivo generado resultado es:</p>
+<pre>import { Injectable } from &#39;@angular/core&#39;;
+
+@Injectable({
+  providedIn: &#39;root&#39;
+})
+export class BookService {
+constructor() { }
+}</pre>
+<p>Ahora vamos a inyectar el servicio definido por angular <code>HttpClient.</code> Inyectamos ese servicio declarando en el constructor e importando el archivo de la clase correspondiente:</p>
+<pre><code>import { HttpClient } from &#39;@angular/common/http&#39;;
+...
+export class BookService {
+    constructor(private http: HttpClient) { }
+...
+}</code></pre>
+<p>Antes de seguir, vamos al módulo principal <code>AppModule</code> e importamos (en el atributo <code>imports</code> del decorador del módulo<code>, HttpClientModule.</code> Debe quedar de la siguiente forma:</p>
+<pre><code>import { BrowserModule } from &#39;@angular/platform-browser&#39;;
+import { NgModule } from &#39;@angular/core&#39;;
+import { HttpClientModule } from &#39;@angular/common/http&#39;;
+
+import { AppComponent } from &#39;./app.component&#39;;
+import { BookModule } from &#39;./book/book.module&#39;;
+import { EditorialModule } from &#39;./editorial/editorial.module&#39;;
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    BookModule,
+    EditorialModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }</code></pre>
+<h2 is-upgraded><strong>Paso 2: Configurar la URL del back-end</strong></h2>
+<p>Para esto se necesita conocer la url donde está el servidor que provee los libros (el back-end).  </p>
+<p>El valor de la url de base donde se encuentra el back-end lo vamos a declarar dentro del archivo environment.ts que está en la carpeta <code>environments</code>: </p>
+<p class="image-container"><img style="width: 288.00px" src="img/802f98ffa691f79e.png"></p>
+<p>Definimos la url del back-end, suponiendo que el back-end está en el localhost y que se ejecuta en el 8080:</p>
+<pre>export const environment = {
+  production: false,
+  host: &#39;localhost&#39;,
+  port: &#39;8080&#39;,
+  appName: &#39;frontstepbystep-api&#39;,
+  rootApi: &#39;api&#39;,
+baseUrl:`http://${this.host}:${this.port}/${this.appName}/${this.rootApi}/`
+};</pre>
+<h2 is-upgraded>Paso 3: Definición de la función http get en el servicio </h2>
+<p>En la clase del servicio, declaramos una función <code>getBooks</code>() va a utilizar el servicio <code>http</code> para invocar el <code>http.get</code>.   Como ya explicamos, estas funciones de http retornan objetos Observable. Entonces la declaración completa de la función es:</p>
+<pre><code>getCourses(): Observable&lt;Book[]&gt; {
+    return this.http.get&lt;Book[]&gt;(this.apiUrl);
+  }</code></pre>
+<p>Debemos importar el archivo de <code>Observable</code> y el archivo de <code>Book</code>.</p>
+<p>El código completo del servicio es el siguiente: </p>
+<h3 is-upgraded>/src/app/book/book.service.ts</h3>
+<pre>import { Injectable } from &#39;@angular/core&#39;;
+import { HttpClient } from &#39;@angular/common/http&#39;;
+import { Observable } from &#39;rxjs&#39;;
+import { Book } from &#39;./book&#39;;
+import { environment } from &#39;../../environments/environment&#39;;
+ 
+
+@Injectable({
+  providedIn: &#39;root&#39;
+})
+export class BookService {
+  private apiUrl = environment.baseUrl + &#39;books&#39;;
+  constructor(private http: HttpClient) { }
+  getCourses(): Observable&lt;Book[]&gt; {
+    return this.http.get&lt;Book[]&gt;(this.apiUrl);
+  }
+}</pre>
+<pre><code></code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Invocar el servicio desde el componente" duration="0">
+        <p>Nuestro componente debe ahora llamar la función creada en el servicio. Tenemos que hacer varias cosas:</p>
+<ul>
+<li>Declarar el servicio para que Angular lo inyecte y podamos usar la función</li>
+<li>Invocar la función que retorna un <code>Observable</code>.</li>
+</ul>
+<p>Para poder usar el servicio en el componente necesitamos declararlo en el constructor e importar el archivo, el fragmento de código donde está esta declaración es:</p>
+<pre><code>...</code></pre>
+<pre>import { BookService } from &#39;../book.service&#39;;
+
+@Component({
+  selector: &#39;app-book-listar&#39;,
+  templateUrl: &#39;./book-listar.component.html&#39;,
+  styleUrls: [&#39;./book-listar.component.css&#39;]
+})
+export class BookListarComponent implements OnInit {
+  constructor(private bookService: BookService) { }</pre>
+<pre><code>...
+}</code></pre>
+<p>Ahora declaramos el método del componente <code>getBooks()</code> así: </p>
+<pre>getBooks(): void {
+    this.bookService.getBooks()
+      .subscribe(books =&gt; {
+        this.books = books;
+      });
+  }</pre>
+<ul>
+<li>Invocamos la función anterior, en el método <code>ngOnInit</code> para que cuando se cree el componente de listar, se llame el back-end para traer los datos de los libros. </li>
+</ul>
+<pre><code>ngOnInit() {
+    this.getBooks();
+  }</code></pre>
+<p>El código completo del componente se puede ver aquí:</p>
+<h3 is-upgraded>/src/app/book/book.component.ts</h3>
+<pre><code>import { Component, OnInit } from &#39;@angular/core&#39;;
+import { Book } from &#39;../book&#39;;
+import { BookService } from &#39;../book.service&#39;;
+
+@Component({
+  selector: &#39;app-book-listar&#39;,
+  templateUrl: &#39;./book-listar.component.html&#39;,
+  styleUrls: [&#39;./book-listar.component.css&#39;]
+})
+export class BookListarComponent implements OnInit {
+  constructor(private bookService: BookService) { }
+
+  private books: Array&lt;Book&gt;;
+
+  getBooks(): void {
+    this.bookService.getBooks()
+      .subscribe(books =&gt; {
+        this.books = books;
+      });
+  }
+  ngOnInit() {
+    this.getBooks();
+  }
+
+}</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="La vista" duration="0">
+        <p>Como ya hemos explicado, la vista es el HTML asociado con el componente. El objetivo es desplegar la lista de cursos en una tabla.</p>
+<h2 is-upgraded><strong>Paso 1: El encabezado</strong></h2>
+<p>El siguiente código muestra una tabla y su encabezado. Note que el archivo contiene sólo la parte de HTML que se va a desplegar. No es un archivo completo HTML, no tiene las etiquetas <code>head</code>  y tampoco  <code>body</code>. </p>
+<pre><code>&lt;div class=&#34;container-fluid&#34;&gt;
+  &lt;div class=&#34;col-6&#34;&gt;
+    &lt;table class=&#34;table&#34;&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th class=&#34;h4&#34;&gt;Course&#39;s Name&lt;/th&gt;
+          &lt;th class=&#34;h4&#34;&gt;Professor&#39;s Name&lt;/th&gt;
+          &lt;th class=&#34;h4&#34;&gt;Credits&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>El contenido dinámico de la tabla lo vamos a crear al interior de las etiquetas:</p>
+<pre><code>&lt;tbody&gt;
+&lt;/tbody&gt;</code></pre>
+<p>Angular ofrece una serie de extensiones a HTML, representadas en nuevas etiquetas y nuevos atributos para facilitar la construcción del contenido dinámico de la página. </p>
+<p>En este ejemplo vamos a ver dos de estas extensiones:</p>
+<ol type="1" start="1">
+<li>Cómo escribir un ciclo dentro de HTML</li>
+<li>Cómo acceder a un valor de un objeto para que quede desplegado en el HTML</li>
+</ol>
+<h2 is-upgraded><strong>Un ciclo dentro de HTML</strong></h2>
+<p>La instrucción es un atributo que se define sobre la etiqueta donde queremos que empiece el ciclo. El ciclo termina donde esa misma etiqueta se cierra.  </p>
+<p>La forma general es: </p>
+<p><code>*ngFor=&#34;let iter of coleccion&#34;</code></p>
+<p>Donde: </p>
+<ul>
+<li><code>iter</code> es una variable local al ciclo</li>
+<li><code>coleccion</code> es un atributo que DEBE estar definido en el componente (es parte dell modelo)</li>
+</ul>
+<p>Así, en nuestro código, queremos construir una fila de la tabla, etiqueta tr, por cada elemento en el arreglo <code>courses</code>  que definimos en el componente.</p>
+<p>La variable c es el iterador del ciclo que va tomando el valor de cada elemento desde principio a fin.  </p>
+<pre> </pre>
+<pre><code>&lt;tr *ngFor=&#34;let c of courses&#34;&gt;
+    // Cuerpo del ciclo
+ &lt;/tr&gt;</code></pre>
+<p>En el cuerpo del ciclo queremos desplegar los datos de cada elemento. Para desplegar un valor de un objeto, utilizamos la expresión <code>&#123;&#123; objeto }}.</code></p>
+<p>Veamos el ejemplo: </p>
+<pre><code>     &lt;tr *ngFor=&#34;let c of courses&#34;&gt;
+          &lt;td&gt;
+            &lt;dd&gt;&#123;&#123;c.name}}&lt;/dd&gt;
+          &lt;/td&gt;
+          &lt;td&gt;
+            &lt;dd&gt;&#123;&#123;c.professor}}&lt;/dd&gt;
+          &lt;/td&gt;
+          &lt;td&gt;
+            &lt;dd&gt;&#123;&#123;c.credits}}&lt;/dd&gt;
+          &lt;/td&gt;
+      &lt;/tr&gt;</code></pre>
+<p>Así, el resultado de la aplicación hasta ahora es:</p>
+<p class="image-container"><img style="width: 442.00px" src="img/992eb9f687a56cbd.png"></p>
+<h2 is-upgraded><strong>Paso 6: Ejecutar la aplicación y resolver el error</strong></h2>
+<p>Al ejecutar la aplicación nos aparece el  siguiente error en la consola. </p>
+<p class="image-container"><img style="width: 602.00px" src="img/191af0d2bdafff25.png"></p>
+<p>Esto se debe a que en el caso del servicio  HttpClient que estamos utilizando en el servicio CourseService, no es suficiente con inyectarlo e importar la clase. Debemos también hacer una importación del módulo en el módulo principal de la aplicación. Así: </p>
+<h3 is-upgraded><a href="https://github.com/Uniandes-isis2603/courseapp/blob/master/src/app/app.module.ts" target="_blank">src/app/app.module.ts</a></h3>
+<pre><code>import { BrowserModule } from &#39;@angular/platform-browser&#39;;
+import { NgModule } from &#39;@angular/core&#39;;
+import { HttpClientModule } from &#39;@angular/common/http&#39;;
+
+import { AppComponent } from &#39;./app.component&#39;;
+import { CourseModule } from &#39;./course/course.module&#39;;
+
+
+@NgModule({
+   declarations: [
+      AppComponent
+   ],
+   imports: [
+      BrowserModule,
+      CourseModule,
+      HttpClientModule
+   ],
+   providers: [],
+   Bootstrap: [
+      AppComponent
+   ]
+})
+export class AppModule { }</code></pre>
+<p>De nuevo podemos ejecutar la aplicación y obtener el resultado esperado. Note que hay muchos más datos en este resultado. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Conclusión" duration="0">
+        
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

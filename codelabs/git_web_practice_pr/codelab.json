@@ -1,0 +1,28 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-03-27T14:45:30Z",
+  "id": "git_web_practice_pr",
+  "duration": 35,
+  "title": "Proyecto git: Mantenimiento de un sitio web estático (aceptación de una petición de validación - Pull Request)",
+  "authors": "Daniel Althviz",
+  "summary": "Proyecto git: Mantenimiento de un sitio web estático (aceptación de una petición de validación - Pull Request)",
+  "source": "1Fz3uTVDqURe45ryDqApTMPZ23EI9XF_SnZLvGllh648",
+  "theme": "git",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "git"
+  ],
+  "tags": [
+    "git",
+    "pr",
+    "tutorial",
+    "web"
+  ],
+  "feedback": "https://github.com/MOOC-tutorials/git_web_practice_pr",
+  "url": "git_web_practice_pr"
+}

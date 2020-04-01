@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-04-01T07:58:15Z",
+  "id": "doc-codelabs-builder",
+  "duration": 35,
+  "title": "Documentación flujo de compilación de Codelabs",
+  "authors": "Daniel Althviz",
+  "summary": "Documentación flujo de compilación de Codelabs",
+  "source": "1JBrGt60RQsjeJsMmJhhkVO1bd64GasfEOw-kg3auuaM",
+  "theme": "documentation",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "documentation"
+  ],
+  "tags": [
+    "codelabs",
+    "documentation",
+    "github app"
+  ],
+  "url": "doc-codelabs-builder"
+}

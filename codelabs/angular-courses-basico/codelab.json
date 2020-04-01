@@ -1,0 +1,22 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-03-30T17:52:18Z",
+  "id": "angular-courses-basico",
+  "duration": 4,
+  "title": "Tutorial Desplegar Lista de Cursos",
+  "authors": "dseuniandes",
+  "summary": "En este tutorial, usted podrá seguir los pasos para desarrollar un componente que permite desplegar en una tabla una lista de cursos de un estudiante. Los cursos se obtienen con un servicio que se conecta vía HTTP GET a un sitio que los provee.",
+  "source": "1m7HcYh46x0peGbp8sP_m9ta3W3CJszzYwExiIYpT-30",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "web"
+  ],
+  "tags": [],
+  "url": "angular-courses-basico"
+}

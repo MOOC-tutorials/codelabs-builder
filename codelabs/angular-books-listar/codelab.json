@@ -1,0 +1,22 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-03-31T13:36:42Z",
+  "id": "angular-books-listar",
+  "duration": 4,
+  "title": "Tutorial Desplegar Lista de Books",
+  "authors": "dseuniandes",
+  "summary": "En este tutorial, usted podrá seguir los pasos para desarrollar un componente que permite desplegar el catálogo de libros de la aplicación ejemplo del curso.. Los libros se obtienen a través del API Rest de la aplicación.",
+  "source": "1am63oC3ZQAi8yjD8js5bo6YPnskr06KtX0zVwTr6Ok8",
+  "theme": "isis2603",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "isis2603"
+  ],
+  "tags": [],
+  "url": "angular-books-listar"
+}

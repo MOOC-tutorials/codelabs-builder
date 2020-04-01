@@ -1,0 +1,576 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Tutorial Desplegar Lista de Cursos</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="angular-courses-basico"
+                  title="Tutorial Desplegar Lista de Cursos"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introducción" duration="2">
+        <p>Este tutorial lo guía, usando <code>VSCode</code>, en la construcción de una aplicación Angular compuesta del módulo principal y de un módulo llamado <code>CourseModule</code> el cual declara un componente para desplegar una lista de cursos.  Los pasos que siguen son:</p>
+<ol type="1" start="1">
+<li>Desplegar la lista de cursos (sin Bootstrap) a partir de un arreglo inicializado directamente con la información  dentro de la aplicación.</li>
+<li>Agregar Bootstrap al paso anterior. </li>
+<li>Cambiar la forma como se obtiene la información de los cursos. Los cursos se obtienen con un servicio que se conecta vía <code>HTTP GET</code> a un sitio que los provee, este servicio retorna una colección de objetos <code>json</code>. </li>
+</ol>
+<aside class="special"><p>El código del ejemplo está en este repositorio:  <a href="https://github.com/Uniandes-isis2603/courseapp" target="_blank">courseapp</a></p>
+<p>Nota: Antes de revisar la solución trate de desarrollar el ejemplo, paso a paso siguiendo este tutorial.</p>
+</aside>
+<p>El resultado final del tutorial es una aplicación que despliega la siguiente lista (Figura 1):</p>
+<p class="image-container"><img style="width: 583.50px" src="img/425746389470a53c.png"></p>
+<p><strong><code>Figura 1</code></strong></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Prerrequisitos" duration="0">
+        <p>Para realizar este taller Ud. debe tener claras los respuestas a las siguientes preguntas:</p>
+<p>Pregunta 1. ¿Qué es un componente en Angular?</p>
+<p>Pregunta 2. ¿Cuál es la relación entre aplicación, módulo y componente?</p>
+<p>Pregunta 3. ¿Qué es un decorador?</p>
+<p>Pregunta 4. ¿Cómo se define la relación entre módulos?</p>
+<p>Pregunta 5. ¿Cómo se define la relación entre módulos y componentes?</p>
+<p>Pregunta 6. ¿Qué es un selector en un componente?</p>
+<p>Pregunta 7. ¿Qué es una vista?</p>
+<p>Pregunta 8. ¿Qué es  &#34;invocar&#34; un componente?</p>
+<p>Pregunta 9. ¿Cuáles son las etiquetas Angular para crear las vistas HTML?</p>
+<p>Si no es así, por favor revise el material propuesto antes de seguir. De esta forma podrá sacarle más provecho a este tutorial. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Crear el proyecto y el módulo del recurso" duration="2">
+        <h2 is-upgraded><strong>Paso 1: Crear el proyecto</strong></h2>
+<p>Cree una aplicación Angular que se llame, por ejemplo, <code>tutorialcourses</code>, siguiendo las instrucciones que se encuentran <a href="https://github.com/Uniandes-isis2603/recursos-isis2603/wiki/vscodeangular" target="_blank">aquí</a>.</p>
+<p>Abra su aplicación en <code>VSCode</code> y:</p>
+<ol type="1" start="1">
+<li>Cambie el título de la página: Vaya al archivo <code>index.html</code> y modifique la etiqueta <code>title</code> por nombre del tutorial &#34;Listar Cursos&#34;.</li>
+<li>Borre el contenido del archivo <code>app.component.html</code></li>
+</ol>
+<h2 is-upgraded><strong>Paso 2: Crear un nuevo módulo </strong></h2>
+<p>Para crear el nuevo módulo utilizamos la aplicación <code>angular-cli</code> que está integrada dentro de <code>VSCode</code>. </p>
+<p>Para esto, vaya a la carpeta <code>app</code>, clic derecho, <code>Generate Module</code>. El nombre del nuevo módulo es <code>course</code> y voila!  </p>
+<p class="image-container"><img style="width: 524.50px" src="img/801e0ca12629662.gif"></p>
+<h2 is-upgraded><strong>Paso 3: Revisar lo que se generó</strong></h2>
+<p>Ahora vamos a revisar lo que generó  <code>angular-cli.</code></p>
+<ul>
+<li>La clase del módulo nuevo se encuentra dentro del archivo <code>course.module.ts</code></li>
+</ul>
+<aside class="special"><p>Nota: Fíjese en la convención de nombre. Cada nuevo elemento se creará en su propio archivo. la primera palabra es el nombre que nosotros le damos, la segunda identifica el tipo de elemento, en este caso es un module. </p>
+<p>En el caso de los elementos que son clases, los nombre de estas se crean en notación camel-case, empezando con el nombre dado y luego el nombre del tipo de elemento, iniciando con mayúscula. En este ejemplo: CourseModule.</p>
+</aside>
+<p class="image-container"><img style="width: 602.00px" src="img/68877b8212ee68f2.png"></p>
+<p>En la línea 11 está la declaración de la clase <code>CourseModule</code>. </p>
+<p>Lo que determina que esta clase es un módulo es el decorador <code>@NgModule</code> que empieza en la línea 5.  </p>
+<p>Note que dentro del decorador hay un objeto que tiene dos atributos: </p>
+<ul>
+<li><code>imports</code> cuyo valor es un arreglo de los nombre de los módulos que necesita  y</li>
+<li><code>declarations</code>  cuyo valor también es un arreglo de los nombre de los componentes que declara.</li>
+</ul>
+<p>En la línea 1 está el import de Angular para el decorador. </p>
+<p>En la línea 2 está lo básico de Angular (<code>CommonModule</code>) que todos los módulos deben importar (importado dentro del decorador en la línea 7)</p>
+<p>En la línea 9, dentro del decorador de módulo, está la declaración del componente que se crea por defecto al crear un  módulo. En la línea 3 se importa el archivo del componente.</p>
+<ul>
+<li>Ahora abra el archivo <code>course.component.ts</code> para revisar el componente que se creó por defecto como parte del módulo.</li>
+</ul>
+<p class="image-container"><img style="width: 602.00px" src="img/329b452fac9e058f.png"></p>
+<p>En la línea 8 está la declaración de la clase <code>CourseComponent</code>. </p>
+<p>Lo que determina que esta clase es un componente es el decorador <code>@Component</code> que empieza en la línea 3.  </p>
+<p>Dentro del decorador hay un objeto que tiene tres atributos: </p>
+<ol type="1" start="1">
+<li><code>selector</code> cuyo valor es un string, que representa la etiqueta que se usará para &#34;invocar&#34; el componente directamente sobre alguna vista. </li>
+<li><code>templateUrl</code> cuyo valor es un string y representa el nombre del archivo que contiene la vista del componente</li>
+<li><code>styleUrls</code> cuyo valor es un arreglo de strings y contiene los nombres de archivos, si los hay, de estilos que se van a usar en este componente particular.</li>
+</ol>
+<p>En la línea 1 está el import de Angular para el decorador del componente (<code>Component</code>).</p>
+<p>También importa el código de la interface  <code>OnInit</code> . El componente implementa la interface <code>OnInit.</code> Esta interface define la función <code>ngOnInit()</code> que se llamará cada vez que se cree el componente. </p>
+<p>En la línea 12 podemos ver que, por defecto, la función está vacía.</p>
+<p>En la línea 10 está el constructor del componente que también está vacío.</p>
+<h2 is-upgraded><strong>Paso 4: Incluir el nuevo módulo en el principal</strong></h2>
+<p>Para que la aplicación pueda utilizar el nuevo módulo, este se debe importar en el módulo principal  <code>AppModule</code> (archivo <code>app.module.ts</code>).</p>
+<p>Para importar en el módulo principal el módulo de <code>CourseModule</code> se debe realizar dos cosas:</p>
+<ul>
+<li>Incluir el archivo donde está la definición: </li>
+</ul>
+<p><code>import { CourseModule } from &#39;./course/course.module&#39;;</code></p>
+<ul>
+<li>Ir al decorador e incluir en el arreglo del atributo <code>imports</code> el nombre del módulo, es decir, de la clase.</li>
+</ul>
+<p class="image-container"><img style="width: 528.50px" src="img/3bc9316ca0b78e52.gif"></p>
+<p>Siempre que incluimos un archivo, debemos tener en cuenta la ruta donde se encuentra, a partir de dónde lo vamos a incluir. </p>
+<aside class="special"><p>Importante:  En el ejemplo anterior, el archivo dónde vamos a incluir a course.module.ts` es app.module.ts. </p>
+<p>Si revisamos la estructura de carpetas, vemos que a partir de donde está app.module.ts, el otro archivo se encuentra dentro de la carpeta course;  la siguiente figura muestra el caso.</p>
+</aside>
+<p class="image-container"><img style="width: 475.00px" src="img/9e83714909583cb4.png"></p>
+<p>La siguiente figura sintetiza la relación entre los elementos hasta ahora creados:</p>
+<p class="image-container"><img style="width: 602.00px" src="img/abd87e2251f7dcc2.png"></p>
+<p>Teniendo en cuenta lo que hemos realizado hasta el momento y el diagrama de clases anterior podemos repasar las respuestas a algunas de las preguntas:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Pregunta 2:  ¿Cuál es la relación entre aplicación, módulo y componente?</p>
+</td><td colspan="1" rowspan="1"><p>Una aplicación está compuesta de módulos. </p>
+<p>Por defecto siempre hay un módulo principal llamado <code>AppModule</code>.</p>
+<p>Un módulo declara componentes. </p>
+<p>En el diagrama de clases:</p>
+<p><code>AppModule</code> declara el componente <code>AppComponent</code>.</p>
+<p><code>CourseModule</code> declara el componente <code>CourseComponent</code>.</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Pregunta 3: ¿Qué es un decorador?</p>
+</td><td colspan="1" rowspan="1"><p>Los decoradores son anotaciones sobre las clases o sobre otros elementos del lenguaje. </p>
+<p>La forma general es: </p>
+<p><code>nombreDecorador(objeto con atributos y valores</code>)</p>
+<p>El decorador y la información en sus atributos determina estructura y comportamiento del elemento que está anotado.</p>
+<p>Hasta ahora en el ejemplo, hemos usado el decorado de clase para definirla como módulo y el decorador de componente. </p>
+<p>En el diagrama de clases estamos representando estos decoradores, que son metadatos, como comentarios. </p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Pregunta 4: ¿Cómo se define la relación entre módulos?</p>
+</td><td colspan="1" rowspan="1"><p>La relación entre módulos, hasta ahora en el ejemplo,  se define como <code>imports. </code></p>
+<p>Significa que el módulo que importa otro podrá &#34;ver&#34; los elementos que el módulo exporta. </p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Pregunta 5: ¿Cómo se define la relación entre módulos y componentes?</p>
+</td><td colspan="1" rowspan="1"><p>Un módulo declara componentes. También declara <code>directivas</code> y <code>pipes</code> pero esos elementos no están en este ejemplo. </p>
+<p>Los componentes pueden ser internos al módulo o el módulo los puede exportar para que otros módulos los utilicen. </p>
+</td></tr>
+</table>
+<h2 is-upgraded><strong>Paso 5. Invocar el  componente </strong></h2>
+<p>Antes de invocar el componente <code>CourseComponent</code>, veamos cómo en el index se invoca el componente principal. </p>
+<p>La siguiente figura presenta el contenido del <code>index.html</code> y el contenido del componente principal <code>AppComponent</code>.</p>
+<p>Donde aparece el número 1 se está invocando el componente principal utilizando su selector.<img style="width: 602.00px" src="img/f56e6c489900271a.png"></p>
+<p>El selector está definido en la línea marcada con el número 2. </p>
+<p>Lo que va a suceder en ejecución, es que, en el lugar donde se está utilizando el selector <code>app-root</code>, se va a reemplazar por el contenido del archivo (marcado con el número 3) <code>app.component.html</code>.</p>
+<p>Siguiendo el mismo principio, lo que vamos a hacer es invocar el componente de los cursos dentro del HTML del componente principal.</p>
+<ol type="1" start="1">
+<li>Buscamos el nombre del selector de <code>CourseComponent</code></li>
+<li>Lo utilizamos en <code>app.component.html</code></li>
+</ol>
+<p class="image-container"><img style="width: 600.00px" src="img/8a2612b26c22903b.gif"></p>
+<p>Sigamos con las preguntas: </p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Pregunta 6: ¿Qué es un selector en un componente?</p>
+</td><td colspan="1" rowspan="1"><p>Corresponde al nombre dado al atributo <code>selector</code>, en el decorador <code>Component,</code> de la clase del componente. </p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Pregunta 7: ¿Qué es una vista?</p>
+</td><td colspan="1" rowspan="1"><p>La vista de un componente, es el código html que será usado cuando se invoque el componente.</p>
+<p>En este ejemplo, estamos utilizando el atributo  <code>templateUrl</code> en el decorador <code>Component,</code> de la clase del componente. El valor del atributo es el nombre del archivo que contiene el código HTML de la vista del componente.  </p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Pregunta 8: ¿Qué es  &#34;invocar&#34; un componente?</p>
+</td><td colspan="1" rowspan="1"><p>Una de las formas de invocar un componente es utilizando su selector como etiqueta HTML en el lugar donde queremos que el componente se despliegue. </p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ejecutar la aplicación y corregir el error" duration="0">
+        <p>Ejecutemos la aplicación utilizando un terminal de <code>VSCode</code> con el comando</p>
+<p><code>ng serve</code></p>
+<p>En la página debería desplegarse el encabezado Lista de cursos del estudiante, pero no aparece nada. </p>
+<ul>
+<li>Abramos la consola y veremos el error:</li>
+</ul>
+<p class="image-container"><img style="width: 602.00px" src="img/70f7289298097d2f.png"></p>
+<p>¿Por qué dice que <code>app-course</code> no es un elemento conocido?  Veamos el diagrama de clases:</p>
+<p class="image-container"><img style="width: 424.00px" src="img/53a6b2c74a1961fc.png"></p>
+<p>Para que el componente <code>CourseComponent</code> que declara el módulo <code>CourseModule</code>, sea visible desde la vista del componente <code>AppComponent</code>, <code>CourseModule</code> debe exportarlo. Modificamos el diagrama para incluir exports sobre la relación entre <code>CouseModule</code> y <code>CourseComponent</code>. </p>
+<p class="image-container"><img style="width: 504.00px" src="img/2147a6e891f580d4.png"></p>
+<p>En el código tenemos que se ha agregado el atributo <code>exports</code> en el decorador del módulo.</p>
+<pre><code>import { NgModule } from &#39;@angular/core&#39;;
+import { CommonModule } from &#39;@angular/common&#39;;
+import { CourseComponent } from &#39;./course.component&#39;;
+
+@NgModule({
+  imports: [
+    CommonModule
+  ],
+  declarations: [CourseComponent],
+  exports: [CourseComponent]
+})
+export class CourseModule { }</code></pre>
+<p>Volvemos a ejecutar la aplicación y obtenemos. </p>
+<p class="image-container"><img style="width: 448.00px" src="img/2d3eb4fceabcb86a.png"></p>
+<p>¿De dónde aparece el texto <code>course works</code><em> </em>?</p>
+<p>ABramos el archivo de la vista del componente <code>CourseComponent</code>. Es decir el archivo <code>course.component.html</code> y aquí tenemos el mensaje que se desplegó. En los próximos pasos vamos a cambiar este mensaje por el despliegue de la lista de cursos. </p>
+<p class="image-container"><img style="width: 394.00px" src="img/26717e542f92b5af.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Implementar el componente" duration="0">
+        <p>En Angular, los componentes siguen una arquitectura Model, View, Controller (MVC). El modelo corresponde a la información que se va a desplegar al usuario o a recibir del usuario a través de la vista del componente. La vista es el HTML que se despliega en la aplicación  y el controlador es la clase del componente que se ocupa de proveer la información del modelo, de atender las acciones del usuario (por ejemplo cuando hace clic en al ún botón, y de mantener la vista actualizada (esto lo hace automáticamente Angular cuando se define el modelo).  </p>
+<p>Veamos estos conceptos en el ejemplo. El modelo es la información de la lista de cursos. El controlador debe tener una forma de obtener esa info, la vista despliega la lista de cursos. En ese ejemplo, como no hay interacción con el usuario, el controlador no es responsable de nada más. </p>
+<p>En los siguientes pasos explicamos cómo construir estos elementos. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="El Modelo" duration="0">
+        <h2 is-upgraded><strong>Paso 1: Definir la estructura del modelo</strong></h2>
+<p>Primero vamos a crear una clase <code>Course</code> que contenga la información de un curso. Un curso tiene un nombre, el nombre del profesor y el número de créditos. </p>
+<p>La clase solo va a declarar los atributos y a definir unos getters para obtener los valores</p>
+<p>Para crear la clase, ir a la carpeta <code>course</code> y desde allí clic derecho luego seleccionar <code>Generate Class</code> y darle como nombre <code>course</code></p>
+<p>Como resultado del comando, podemos ver que se creó el archivo <code>course.ts</code> dentro de la carpeta <code>course</code>. </p>
+<pre><code>export class Course {
+
+  constructor(private nameA: string, private professorA: string, private creditsA: number) {
+
+  }
+  get name(): string { return this.nameA; }
+  get professor(): string { return this.professorA; }
+  get credits(): number { return this.creditsA; }
+}</code></pre>
+<p>Al definir los getter de la forma como está en el código, esto es syntaxis TypeScript, podemos luego invocar el método utilizando solo el nombre del getter. Por ejemplo, </p>
+<p><code>this.name</code> </p>
+<h2 is-upgraded><strong>Paso 2: Asociar el modelo con el componente</strong></h2>
+<p>Ahora que tenemos la clase que representa los cursos, podemos declarar, dentro de la clase del componente, un arreglo para los cursos:</p>
+<pre><code>private courses: Array&lt;Course&gt;; </code></pre>
+<p>Nos aparece que <code>Course</code> no está definido, entonces debemos importarlo:</p>
+<pre><code>import { Component, OnInit } from &#39;@angular/core&#39;;
+import { Course } from &#39;./course&#39;;
+
+@Component({
+  selector: &#39;app-course&#39;,
+  templateUrl: &#39;./course.component.html&#39;,
+  styleUrls: [&#39;./course.component.css&#39;]
+})
+export class CourseComponent implements OnInit {
+
+  constructor() { }
+  private courses: Array&lt;Course&gt;;
+  ngOnInit() {
+  }
+}</code></pre>
+<p>Hasta acá el arreglo está <code>undefined</code>. Para resolver esto, tenemos que inicializar el arreglo. </p>
+<p>En este paso, vamos primero a darle valor utilizando unos datos construidos directamente en el código (*Como se hizo en el taller de TypeScript).</p>
+<h2 is-upgraded><strong>Los datos para el modelo</strong></h2>
+<p>Vamos a declarar un arreglo que contiene los cursos. Esto lo hacemos en un archivo (<code>New File</code> desde <code>VSCode</code>) que se encuentre en la carpeta <code>course</code> y que se llame <code>dataCourses.ts</code>. </p>
+<p>En este archivo declaramos e inicializamos el arreglo con algunos datos de los cursos. Como estamos creando objetos de la clase <code>Course</code>, debemos importar esta clase (primera línea del archivo).   </p>
+<pre><code>import { Course } from &#39;./course&#39;;
+export const dataCourses = [
+  new Course(&#39;Ingeniería de Sw&#39;, &#39;Pablo Picasso&#39;, 4),
+  new Course(&#39;Futbol 1&#39;, &#39;Freddy Rincón&#39;, 2),
+  new Course(&#39;Algoritmos&#39;, &#39;Carlos Fuentes&#39;, 2),
+  new Course(&#39;Estructuras de Datos&#39;, &#39;Yesid D&#39;, 1),
+  new Course(&#39;Futbol 2&#39;, &#39;James R&#39;, 6)
+];</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="El Controlador" duration="0">
+        <p>El controlador, que es la clase del componente, debe ocuparse de tener acceso al modelo.</p>
+<p>Para esto definimos un  atributo privado courses y un método público que lo retorna. </p>
+<pre><code>private courses: Array&lt;Course&gt;;
+  getCourseList(): Array&lt;Course&gt; {
+    return dataCourses;
+  }</code></pre>
+<p><code>dataCourses</code> es la variable que definimos en el archivo <code>dataCourses.ts</code> entonces, tenemos que importarlo. </p>
+<p>En la función que se va a llamar cuando se cree el componente, es decir,  función <code>ngInit()</code> actualizamos la variable del componente que contiene la información.</p>
+<p>Esta variable es la que va a cceder la vista del componente como veremos en el siguiente paso. </p>
+<pre>import { Component, OnInit } from &#39;@angular/core&#39;;
+import { Course } from &#39;./course&#39;;
+import { dataCourses } from &#39;./dataCourses&#39;;</pre>
+<pre><code>@Component({
+  selector: &#39;app-course&#39;,
+  templateUrl: &#39;./course.component.html&#39;,
+  styleUrls: [&#39;./course.component.css&#39;]
+})
+export class CourseComponent implements OnInit {
+
+  constructor() { }
+  private courses: Array&lt;Course&gt;;
+  getCourseList(): Array&lt;Course&gt; {
+    return dataCourses;
+  }
+  ngOnInit() {
+    this.courses = this.getCourseList();
+  }
+}</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="La vista" duration="0">
+        <p>Como ya hemos explicado, la vista es el HTML asociado con el componente. El objetivo es desplegar la lista de cursos en una tabla.</p>
+<h2 is-upgraded><strong>Paso 1: El encabezado</strong></h2>
+<p>El siguiente código muestra una tabla y su encabezado. Note que el archivo contiene sólo la parte de HTML que se va a desplegar. No es un archivo completo HTML, no tiene las etiquetas <code>head</code>  y tampoco  <code>body</code>. </p>
+<pre><code>&lt;div class=&#34;container-fluid&#34;&gt;
+  &lt;div class=&#34;col-6&#34;&gt;
+    &lt;table class=&#34;table&#34;&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th class=&#34;h4&#34;&gt;Course&#39;s Name&lt;/th&gt;
+          &lt;th class=&#34;h4&#34;&gt;Professor&#39;s Name&lt;/th&gt;
+          &lt;th class=&#34;h4&#34;&gt;Credits&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>El contenido dinámico de la tabla lo vamos a crear al interior de las etiquetas:</p>
+<pre><code>&lt;tbody&gt;
+&lt;/tbody&gt;</code></pre>
+<p>Angular ofrece una serie de extensiones a HTML, representadas en nuevas etiquetas y nuevos atributos para facilitar la construcción del contenido dinámico de la página. </p>
+<p>En este ejemplo vamos a ver dos de estas extensiones:</p>
+<ol type="1" start="1">
+<li>Cómo escribir un ciclo dentro de HTML</li>
+<li>Cómo acceder a un valor de un objeto para que quede desplegado en el HTML</li>
+</ol>
+<h2 is-upgraded><strong>Un ciclo dentro de HTML</strong></h2>
+<p>La instrucción es un atributo que se define sobre la etiqueta donde queremos que empiece el ciclo. El ciclo termina donde esa misma etiqueta se cierra.  </p>
+<p>La forma general es: </p>
+<p><code>*ngFor=&#34;let iter of coleccion&#34;</code></p>
+<p>Donde: </p>
+<ul>
+<li><code>iter</code> es una variable local al ciclo</li>
+<li><code>coleccion</code> es un atributo que DEBE estar definido en el componente (es parte dell modelo)</li>
+</ul>
+<p>Así, en nuestro código, queremos construir una fila de la tabla, etiqueta tr, por cada elemento en el arreglo <code>courses</code>  que definimos en el componente.</p>
+<p>La variable c es el iterador del ciclo que va tomando el valor de cada elemento desde principio a fin.  </p>
+<pre> </pre>
+<pre><code>&lt;tr *ngFor=&#34;let c of courses&#34;&gt;
+    // Cuerpo del ciclo
+ &lt;/tr&gt;</code></pre>
+<p>En el cuerpo del ciclo queremos desplegar los datos de cada elemento. Para desplegar un valor de un objeto, utilizamos la expresión <code>&#123;&#123; objeto }}.</code></p>
+<p>Veamos el ejemplo: </p>
+<pre><code>     &lt;tr *ngFor=&#34;let c of courses&#34;&gt;
+          &lt;td&gt;
+            &lt;dd&gt;&#123;&#123;c.name}}&lt;/dd&gt;
+          &lt;/td&gt;
+          &lt;td&gt;
+            &lt;dd&gt;&#123;&#123;c.professor}}&lt;/dd&gt;
+          &lt;/td&gt;
+          &lt;td&gt;
+            &lt;dd&gt;&#123;&#123;c.credits}}&lt;/dd&gt;
+          &lt;/td&gt;
+      &lt;/tr&gt;</code></pre>
+<p>Así, el resultado de la aplicación hasta ahora es:</p>
+<p class="image-container"><img style="width: 442.00px" src="img/992eb9f687a56cbd.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Agregar Bootstrap" duration="0">
+        <h2 is-upgraded><strong>Paso 1: Instalar Bootstrap</strong></h2>
+<p>Para agregar bootstrap en nuestro proyecto, debemos definir la dependencia en el archivo <code>package.json</code>. En la siguiente imagen vemos esta dependencia en la línea 22,  <code>&#34;bootstrap&#34;: &#34;^4.4.1&#34;</code> estamos definiendo una versión de Bootstrap compatible (eso significa <code>^</code>) con la <code>4.4.1</code>. Para entender mejor las convenciones o semántica de los símbolos en la definición de las versiones pueden ver <a href="https://docs.npmjs.com/files/package.json#dependencies" target="_blank">semve</a>.</p>
+<p class="image-container"><img style="width: 602.00px" src="img/f7d2f9dd3aa8f6d7.png"></p>
+<p>Una vez modificado el archivo <code>package.json</code> debemos ejecutar de nuevo:</p>
+<p><code>npm install </code></p>
+<p>Esto es así sin importar qué se modificó en ese archivo. Si desde <code>VSCode</code> tengo un terminal que está ejecutando <code>ng serve</code>, entonces debo suspender esa ejecución e invocar el <code>npm install</code>.</p>
+<p class="image-container"><img style="width: 600.00px" src="img/3ae8ef7b98dae439.gif"></p>
+<p>El resultado es instalar las dependencias nuevas.</p>
+<h2 is-upgraded><strong>Paso 2: Agregar los estilos bootstrap al proyecto</strong></h2>
+<p>Para agregar los estilos Bootstrap al proyecto debemos ir al archivo <code>angular.json</code> y en el atributo styles agregar la referencia a los estilos de Bootstrap locales que acabamos de instalar:</p>
+<p class="image-container"><img style="width: 602.00px" src="img/980cee3da7244dff.png"></p>
+<h2 is-upgraded><strong>Paso 3: Ejecutar de nuevo</strong></h2>
+<p>Ahora podemos ejecutar de nuevo <code>ng serve</code> y obtendremos la siguiente lista: </p>
+<p class="image-container"><img style="width: 602.00px" src="img/5e1e7f6846d8fe96.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Agregar un servicio que llama HTTP GET" duration="0">
+        <p>En este paso vamos a cambiar la obtención de los datos, creado en memoria directamente el código, por el llamado a un servicio <code>HTTP GET.</code></p>
+<p>Para esto debemos:</p>
+<ol type="1" start="1">
+<li>Crear un servicio y entender la inyección de dependencias en Angular</li>
+<li>Utilizar el módulo <code>HttpClientModule</code> de angular y su servicio  <code>HttpClient</code>. Esto nos permite de una manera sencilla hacer llamos HTTP (get, post, put, delete).</li>
+<li>Crear un método en el servicio que retorna un objeto <code>Observable</code> (asíncrono)</li>
+<li>Crear la variable de ambiente url</li>
+<li>Invocar con una suscripción, el método del servicio,  desde el componente para que obtenga los cursos.</li>
+</ol>
+<h2 is-upgraded><strong>Paso 1: Crear un servicio</strong></h2>
+<p>Los servicios son clases que ofrecen funciones que serán utilizadas por componentes u otros elementos angular. ¿Cómo organizar las clases servicios? Es una decisión de diseño. Las clases servicios deben ser cohesivas, es decir, ocuparse de un solo tipo de responsabilidad. </p>
+<p>En este ejemplo, vamos a crear un servicio que se ocupa de obtener el modelo para el componente de los cursos. </p>
+<p>Dado que un servicio es una clase, si otra clase tiene acceso al servicio, lo podría crear. Sin embargo, la creación de los servicios es responsabilidad de Angular y funciona de la siguiente manera:</p>
+<ul>
+<li>El servicio debe ser Inyectable (va a estar anotado con <code>@Injectable(...))</code></li>
+<li>El componente que lo va a usar, lo debe declarar en su constructor. </li>
+<li>Cuando el componente es creado, Angular le inyecta una instancia del servicio. </li>
+</ul>
+<p>Vamos a crear el servicio desde la carpeta <code>course.</code> De nuevo usamos <code>angular-cli:</code></p>
+<p class="image-container"><img style="width: 600.00px" src="img/3f768a39fba4dee7.gif"></p>
+<p>El  archivo generado resultado es:</p>
+<pre><code>import { Injectable } from &#39;@angular/core&#39;;
+@Injectable({
+  providedIn: &#39;root&#39;
+})
+export class CourseService {
+constructor() { }
+}</code></pre>
+<p>Note la anotación <code>@Injectable.</code> El atributo <code>providedIn: ‘r</code>oot&#39; significa que el servicio podrá ser utilizado en cualquier parte de la aplicación. </p>
+<h2 is-upgraded><strong>Paso 2: Utilizar HttpClient</strong></h2>
+<p>Nuestro servicio va a definir una función <code>getCourses()</code> que obtiene los cursos desde un sitio (vas a decir desde un back-end) utilizando HTTP get.  Para esto, vamos a inyectar un servicio definido por angular que se llama <code>HttpClient.</code> Inyectamos ese servicio declarando en el constructor e importando el archivo de la clase correspondiente:</p>
+<pre><code>import { HttpClient } from &#39;@angular/common/http&#39;;
+...
+export class CourseService {
+    constructor(private http: HttpClient) { }
+...
+}</code></pre>
+<p>La función <code>getCourses</code>() va a utilizar http para invocar el get. Para esto se necesita conocer la url donde está el servidor que provee los cursos (el back-end).  Vamos a suponer que el valor de esa url está en el atributo <code>apiUrl</code> en el paso explicamos esa variable y dónde se inicializa. Entonces, la función es debe llamar:</p>
+<p><code>this.http.get(this.apiUrl)</code></p>
+<h2 is-upgraded><strong>Paso 3: Observables y asincronía</strong></h2>
+<p>Todas las funciones http son asíncronas, es decir se hace el llamado pero la aplicación que llamó, en este caso el front, sigue su curso. Por esta razón, estas funciones devuelven el resultado en un objeto  <code>Observable</code>. </p>
+<p>El código completo del servicio es el siguiente: </p>
+<h3 is-upgraded><a href="https://github.com/Uniandes-isis2603/courseapp/blob/master/src/app/course/course.service.ts#L11" target="_blank">/src/app/course/course.service.ts</a></h3>
+<pre><code>import { Injectable } from &#39;@angular/core&#39;;
+import { HttpClient } from &#39;@angular/common/http&#39;;
+import { Observable } from &#39;rxjs&#39;;
+import { Course } from &#39;./course&#39;;
+
+import { environment } from &#39;../../environments/environment&#39;;
+
+@Injectable({
+  providedIn: &#39;root&#39;
+})
+export class CourseService {
+  private apiUrl = environment.baseUrl + &#39;courses.json&#39;;
+
+  constructor(private http: HttpClient) { }
+
+  getCourses(): Observable&lt;Course[]&gt; {
+    return this.http.get&lt;Course[]&gt;(this.apiUrl);
+  }
+}</code></pre>
+<h2 is-upgraded><strong>Paso 4: Crear la variable de ambiente url</strong></h2>
+<p>El valor de la url de base donde se encuentra el back-end lo vamos a declarar dentro del archivo environment.ts que está en la carpeta <code>environments</code>: </p>
+<p class="image-container"><img style="width: 288.00px" src="img/802f98ffa691f79e.png"></p>
+<p>Vemos que allí hay dos archivos. El de producción que tendrá los valores de las url en producción y el de desarrollo que es el que estamos actualizando.</p>
+<p>El contenido es un objeto con atributos de configuración. En particular está el atributo baseUrl que hemos definido para componer la url final. En este ejemplo, esta url lleva a un json que está guardado en un repo de github. </p>
+<p class="image-container"><img style="width: 373.35px" src="img/80d1597cb27276c9.png"></p>
+<p>Desde nuestro servicio incluimos este archivo y componemos la url final utilizando el valor en:</p>
+<pre><code>environment.baseUrl: &#34;https://gist.githubusercontent.com/josejbocanegra/9bc286433e85ad2fdd3b4d3b2a1998f8/raw/ab432ff4f10f767a8c997a8e15012cd7d908dd62/&#34;</code></pre>
+<h2 is-upgraded><strong>Paso 5: Suscribirse al observable del servicio</strong></h2>
+<p>Nuestro componente debe ahora llamar la función creada en el servicio. Tenemos que hacer varias cosas:</p>
+<ul>
+<li>Declarar el servicio para que Angular lo inyecte y podamos usar la función</li>
+</ul>
+<p>Invocar la función que retorna un <code>Observable</code>.</p>
+<p>Para poder usar el servicio en el componente necesitamos declararlo en el constructor e importar el archivo:</p>
+<pre><code>...
+import { CourseService } from &#39;./course.service&#39;;
+
+@Component({
+  selector: &#39;app-course&#39;,
+  templateUrl: &#39;./course.component.html&#39;,
+  styleUrls: [&#39;./course.component.css&#39;]
+})
+export class CourseComponent implements OnInit {
+
+  constructor(private courseService: CourseService) { }
+...
+}</code></pre>
+<p>Un <code>Observable</code> tiene una función de suscripción. </p>
+<p>Significa que quien llama al observable, se suscribe a él. </p>
+<p>Cuando el método asíncrono termina, se va a ejecutar la suscripción. </p>
+<p>La suscripción recibe una función y esa función tiene:</p>
+<ol type="1" start="1">
+<li>como parámetro el resultado del método asíncrono y </li>
+<li>en el cuerpo de la función lo que queremos hacer con ese resultado.</li>
+</ol>
+<p>Si el resultado está en la variable <code>cs</code> (los cursos que devolvió el servicio), lo que queremos hacer es actualizar el atributo de la clase:</p>
+<pre><code>cs =&gt; {this.courses = cs; }</code></pre>
+<p>Entonces, tenemos que cambiar el método del componente <code>getCoursesList()</code> así: </p>
+<pre><code>getCourseList() {
+    this.courseService.getCourses().subscribe(cs =&gt; {
+      this.courses = cs;
+    });
+}</code></pre>
+<p>El código completo del componente se puede ver aquí:</p>
+<h3 is-upgraded><a href="https://github.com/Uniandes-isis2603/courseapp/blob/master/src/app/course/course.component.ts" target="_blank">/src/app/course/course.component.ts</a></h3>
+<pre><code>import { Component, OnInit } from &#39;@angular/core&#39;;
+import { Course } from &#39;./course&#39;;
+import { dataCourses } from &#39;./dataCourses&#39;;
+import { CourseService } from &#39;./course.service&#39;;
+
+@Component({
+  selector: &#39;app-course&#39;,
+  templateUrl: &#39;./course.component.html&#39;,
+  styleUrls: [&#39;./course.component.css&#39;]
+})
+export class CourseComponent implements OnInit {
+
+  constructor(private courseService: CourseService) { }
+  private courses: Array&lt;Course&gt;;
+
+  getCourseList() {
+    this.courseService.getCourses().subscribe(cs =&gt; {
+      this.courses = cs;
+    });
+  }
+  ngOnInit() {
+    this.getCourseList();
+  }
+}</code></pre>
+<h2 is-upgraded><strong>Paso 6: Ejecutar la aplicación y resolver el error</strong></h2>
+<p>Al ejecutar la aplicación nos aparece el  siguiente error en la consola. </p>
+<p class="image-container"><img style="width: 602.00px" src="img/191af0d2bdafff25.png"></p>
+<p>Esto se debe a que en el caso del servicio  HttpClient que estamos utilizando en el servicio CourseService, no es suficiente con inyectarlo e importar la clase. Debemos también hacer una importación del módulo en el módulo principal de la aplicación. Así: </p>
+<h3 is-upgraded><a href="https://github.com/Uniandes-isis2603/courseapp/blob/master/src/app/app.module.ts" target="_blank">src/app/app.module.ts</a></h3>
+<pre><code>import { BrowserModule } from &#39;@angular/platform-browser&#39;;
+import { NgModule } from &#39;@angular/core&#39;;
+import { HttpClientModule } from &#39;@angular/common/http&#39;;
+
+import { AppComponent } from &#39;./app.component&#39;;
+import { CourseModule } from &#39;./course/course.module&#39;;
+
+
+@NgModule({
+   declarations: [
+      AppComponent
+   ],
+   imports: [
+      BrowserModule,
+      CourseModule,
+      HttpClientModule
+   ],
+   providers: [],
+   Bootstrap: [
+      AppComponent
+   ]
+})
+export class AppModule { }</code></pre>
+<p>De nuevo podemos ejecutar la aplicación y obtener el resultado esperado. Note que hay muchos más datos en este resultado. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Conclusión" duration="0">
+        <p>Como conclusión del tutorial tenemos el diagrama completo de clases del ejemplo:</p>
+<p class="image-container"><img style="width: 602.00px" src="img/4048467b0470fe3.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

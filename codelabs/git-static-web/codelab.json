@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-10-15T14:48:04Z",
+  "updated": "2020-03-25T18:35:45Z",
   "id": "git-static-web",
   "duration": 35,
   "title": "Proyecto git: Corrigiendo un sitio web estático",
   "authors": "Daniel Althviz",
   "summary": "Proyecto git: Corrigiendo un sitio web estático",
-  "source": "1H40sqzJODMql-SDeICRWaIk6TShVI7U6ReD84W_nZGs",
+  "source": "1girlbe2--OU0iokM2KeVW3QRzSrHzZNZT6_jJA3ysmg",
   "theme": "tutorial",
   "status": [
     "draft"
@@ -22,6 +22,6 @@
     "tutorial",
     "web"
   ],
-  "feedback": "https://github.com/dalthviz/git_web_practice",
+  "feedback": "https://github.com/MOOC-tutorials/git_web_practice",
   "url": "git-static-web"
 }
