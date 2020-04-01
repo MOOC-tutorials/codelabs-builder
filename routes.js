@@ -42,6 +42,7 @@ module.exports = (app) => {
                 const baseDir = output.split('\t').pop();
                 commitBuild(baseDir);
                 res.redirect('codelabs');
+                //res.sendFile(__dirname + '/views/success.html');
             });            
             } else {
               //No code exists

@@ -17,7 +17,7 @@
     "@octokit/rest": "^16.40.2"
   },
   "engines": {
-    "node": "^8.0"
+    "node": "^10.0"
   },
   "keywords": [
     "node",

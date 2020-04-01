@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2020-01-29T14:51:51Z",
+  "updated": "2019-10-17T21:57:26Z",
   "id": "ambiente-mv",
   "duration": 25,
   "title": "Tutorial Probar ambiente de desarrollo MV",
   "authors": "dseuniandes",
   "summary": "En este tutorial, usted probará el ambiente de desarrollo para el proyecto del curso en su máquina virtual.",
-  "source": "15BLqUwV8D1xqZnqOzfpiHL7O97sGPYQROzYKmgEodFE",
+  "source": "1I5nb-VHWkrsf2jN7yHuNwBBA2aCCjhdgG4M_q4tP3dI",
   "theme": "mv",
   "status": [
     "published"

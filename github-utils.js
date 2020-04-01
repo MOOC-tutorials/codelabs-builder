@@ -21,23 +21,39 @@ const octokit = new Octokit({
 // Commit constants
 const REPO = 'codelabs';
 const OWNER = 'MOOC-tutorials';
-const BRANCH = 'staging';
 const BASE_PATH = 'codelabs/';
 const BASE = 'master';
+const BASE_REF = 'heads/master';
 
-const commitFile = async (path, fileContent) => {
-   console.log(path, OWNER, REPO, BRANCH);
+const commitFile = async (path, fileContent, baseDir) => {
+   console.log(path, OWNER, REPO, baseDir);
+   const base_ref = await octokit.git.getRef({
+     owner: OWNER,
+     repo: REPO,
+     ref: BASE_REF
+   })
+   const base_sha = base_ref.data.object.sha;
+   await octokit.git.createRef({
+     owner: OWNER,
+     repo: REPO,
+     ref: 'refs/heads/' + baseDir,
+     sha: base_sha
+   }).catch((err) => {
+    console.log(err.errors);
+    //Already a branch exists
+  });
+
    const existingFile = await octokit.repos.getContents({
      owner: OWNER,
      repo: REPO,
      path,
-     ref: BRANCH
+     ref: baseDir
    }).catch(async (err) => {
      //console.log(err);
      const newFile = await octokit.repos.createOrUpdateFile(
      {owner: OWNER,
       repo: REPO,
-      branch: BRANCH,
+      branch: baseDir,
       path,
       content: fileContent, 
       message: 'Update ' + path,
@@ -45,18 +61,18 @@ const commitFile = async (path, fileContent) => {
        console.log("Fail creation of file");
        console.log(err);
      });
-     return newFile;
+     //return newFile;
    });
-  if(existingFile && existingFile.data){
+  if(existingFile){
     console.log(existingFile.data);
     return await octokit.repos.createOrUpdateFile(
      {owner: OWNER,
       repo: REPO,
-      branch: BRANCH,
+      branch: baseDir,
       path,
       content: fileContent, 
       message: 'Update ' + path,
-      sha: existingFile.data.sha || existingFile.data.content.sha});
+      sha: existingFile.data.sha});
   }
 }
 
@@ -67,14 +83,14 @@ exports.commitBuild = async (baseDir) => {
   // index
   const indexPath = BASE_PATH + baseDir + '/index.html';
   const indexFile = new Buffer(readFileSync(__dirname+ '/' + indexPath)).toString('base64');
-  const indexCommit = await commitFile(indexPath, indexFile);
-  console.log(indexCommit.data.commit.message);
+  const indexCommit = await commitFile(indexPath, indexFile, baseDir);
+  console.log(indexPath);
 
   // codelabs.json
   const codelabsJsonPath = BASE_PATH + baseDir + '/codelab.json';
   const codelabsJsonFile = new Buffer(readFileSync(__dirname+ '/' + codelabsJsonPath)).toString('base64');;
-  const codelabsJsonCommit = await commitFile(codelabsJsonPath, codelabsJsonFile);
-  console.log(codelabsJsonCommit.data.commit.message);
+  const codelabsJsonCommit = await commitFile(codelabsJsonPath, codelabsJsonFile, baseDir);
+  console.log(codelabsJsonPath);
 
   // img
   const baseImgPath = __dirname + '/' + BASE_PATH + baseDir + '/img/';
@@ -83,16 +99,16 @@ exports.commitBuild = async (baseDir) => {
     const image = images[i];
     const imgPath = BASE_PATH + baseDir + '/img/' + image;
     const imgFile = new Buffer(readFileSync(baseImgPath + image)).toString('base64');
-    const imgCommit = await commitFile(imgPath, imgFile);
-    console.log(imgCommit.data.commit.message);
+    const imgCommit = await commitFile(imgPath, imgFile, baseDir);
+    console.log(imgPath);
   }
   
   // Open pull request
   const pullRequest = await octokit.pulls.create({
     owner: OWNER,
     repo: REPO,
-    title: 'Update codelabs',
-    head: BRANCH,
+    title: 'Update codelab: ' + baseDir ,
+    head: baseDir,
     base: BASE
   }).catch((err) => {
     console.log(err.errors);

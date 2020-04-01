@@ -1,0 +1,71 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Documentación flujo de compilación de Codelabs</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="doc-codelabs-builder"
+                  title="Documentación flujo de compilación de Codelabs"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introducción al flujo de compilación de codelabs" duration="5">
+        <p>La siguiente documentación hace referencia a un <em>pipeline</em> que busca realizar la compilación de <a href="https://github.com/googlecodelabs/tools" target="_blank">Codelabs</a> y su despliegue en un sitio estático usando tags y categorías para su organización en subconjuntos/subsitios. El <em>pipeline </em>cuenta con una aplicación que permite realizar la compilación de los Codelabs usando las credenciales de Google de un usuario y dando la identificación (id) del documento en Google drive que sigue las <a href="https://github.com/googlecodelabs/tools/blob/master/FORMAT-GUIDE.md" target="_blank">convenciones de estilo de un Codelab</a>. Luego de la compilación, los archivos resultantes son enviados a un repositorio mediante una petición de cambios (<em>pull request/PR</em>) para, luego de su aceptación, desplegar el sitio con los nuevos codelabs.</p>
+<p>Así pues, dentro de este flujo de trabajo, dos pasos son manuales y el resto de acciones son automáticas. La primera acción, es enviar el requerimiento de compilación de un Codelab al usar la aplicación de compilación ingresando un identificador de un documento de Google. La segunda acción es la aceptación de la petición de cambios que se efectúa en el repositorio que contiene el código del sitio estático.</p>
+<p>En la siguiente sección, se realiza una descripción más en detalle de cada uno de los pasos así como condiciones para poder realizar el uso del mismo y la compilación de los codelabs.</p>
+<p>Algunos enlaces asociados a los elementos previamente mencionados:</p>
+<ul>
+<li>Código de la aplicación de compilación de Codelabs se encuentra <a href="https://github.com/MOOC-tutorials/codelabs-builder" target="_blank">disponible en Github</a></li>
+<li>Código del sitio estático se encuentra <a href="https://github.com/MOOC-tutorials/codelabs" target="_blank">disponible en Github</a></li>
+<li><a href="http://157.253.238.50/" target="_blank">Dirección del sitio desplegado</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Flujo de trabajo" duration="10">
+        <p>Los pasos que componen la compilación se resumen en el siguiente gráfico:</p>
+<p class="image-container"><img style="width: 624.00px" src="img/73333e0eb53e636.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creación de un codelab" duration="10">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Petición de permisos para agregar un Codelab al sitio estático" duration="10">
+        <p>Teniendo en cuenta la necesidad de aceptación de la petición de cambios, es necesario que el autor del codelab tenga permisos para aceptar su petición luego de una revisión y la comprobación de que su Codelab tiene el contenido correcto y se visualiza en la manera deseada.</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

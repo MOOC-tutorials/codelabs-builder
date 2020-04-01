@@ -1,0 +1,28 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-03-27T14:43:01Z",
+  "id": "git_web_practice_branch",
+  "duration": 35,
+  "title": "Ejercicio git: Corrigiendo un sitio web estático usando ramas",
+  "authors": "Daniel Althviz",
+  "summary": "Ejercicio git: Corrigiendo un sitio web estático usando ramas",
+  "source": "12kiBdogeNA9godAgmRXUjhOl3HbIFuhAGPbF1q8j4Yc",
+  "theme": "git",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "git"
+  ],
+  "tags": [
+    "branch",
+    "git",
+    "tutorial",
+    "web"
+  ],
+  "feedback": "https://github.com/MOOC-tutorials/git_web_practice_branch",
+  "url": "git_web_practice_branch"
+}
